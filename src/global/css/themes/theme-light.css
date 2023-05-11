@@ -1,0 +1,43 @@
+:root {
+ --vy-sys-color-primary: var(--vy-sys-color-primary-light);
+ --vy-sys-color-on-primary: var(--vy-sys-color-on-primary-light);
+ --vy-sys-color-primary-container: var(--vy-sys-color-primary-container-light);
+ --vy-sys-color-on-primary-container: var(--vy-sys-color-on-primary-container-light);
+
+ --vy-sys-color-secondary: var(--vy-sys-color-secondary-light);
+ --vy-sys-color-on-secondary: var(--vy-sys-color-on-secondary-light);
+ --vy-sys-color-secondary-container: var(--vy-sys-color-secondary-container-light);
+ --vy-sys-color-on-secondary-container: var(--vy-sys-color-on-secondary-container-light);
+
+ --vy-sys-color-tertiary: var(--vy-sys-color-tertiary-light);
+ --vy-sys-color-on-tertiary: var(--vy-sys-color-on-tertiary-light);
+ --vy-sys-color-tertiary-container: var(--vy-sys-color-tertiary-container-light);
+ --vy-sys-color-on-tertiary-container: var(--vy-sys-color-on-tertiary-container-light);
+
+ --vy-sys-color-error: var(--vy-sys-color-error-light);
+ --vy-sys-color-error-container: var(--vy-sys-color-error-container-light);
+ --vy-sys-color-on-error: var(--vy-sys-color-on-error-light);
+ --vy-sys-color-on-error-container: var(--vy-sys-color-on-error-container-light);
+
+ --vy-sys-color-success: var(--vy-sys-color-success-light);
+ --vy-sys-color-success-container: var(--vy-sys-color-success-container-light);
+ --vy-sys-color-on-success: var(--vy-sys-color-on-success-light);
+ --vy-sys-color-on-success-container: var(--vy-sys-color-on-success-container-light);
+
+ --vy-sys-color-background: var(--vy-sys-color-background-light);
+ --vy-sys-color-on-background: var(--vy-sys-color-on-background-light);
+
+ --vy-sys-color-surface: var(--vy-sys-color-surface-light);
+ --vy-sys-color-on-surface: var(--vy-sys-color-on-surface-light);
+ --vy-sys-color-surface-variant: var(--vy-sys-color-surface-variant-light);
+ --vy-sys-color-on-surface-variant: var(--vy-sys-color-on-surface-variant-light);
+
+ --vy-sys-color-outline: var(--vy-sys-color-outline-light);
+ --vy-sys-color-inverse-on-surface: var(--vy-sys-color-inverse-on-surface-light);
+ --vy-sys-color-inverse-surface: var(--vy-sys-color-inverse-surface-light);
+ --vy-sys-color-inverse-primary: var(--vy-sys-color-inverse-primary-light);
+ --vy-sys-color-shadow: var(--vy-sys-color-shadow-light);
+ --vy-sys-color-surface-tint: var(--vy-sys-color-surface-tint-light);
+ --vy-sys-color-outline-variant: var(--vy-sys-color-outline-variant-light);
+ --vy-sys-color-scrim: var(--vy-sys-color-scrim-light);
+}

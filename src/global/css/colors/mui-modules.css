@@ -1,0 +1,43 @@
+.Mui-error {
+    color: var(--vy-sys-color-error) !important;
+}
+
+.MuiFormLabel-root:not(.Mui-focused):not(.Mui-error) {
+    color: var(--vy-sys-color-on-surface) !important;
+}
+
+.MuiOutlinedInput-root:not(.Mui-error) {
+    color: var(--vy-sys-color-on-surface) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--vy-sys-color-on-surface) !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--vy-sys-color-tertiary) !important;
+}
+
+.MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
+    border-color: var(--vy-sys-color-error) !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--vy-sys-color-tertiary) !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input {
+    color: var(--vy-sys-color-on-surface) !important;
+}
+
+.MuiFormLabel-root.Mui-focused:not(.Mui-error) {
+    color: var(--vy-sys-color-tertiary) !important;
+}
+
+.MuiFormHelperText-root {
+    color: var(--vy-sys-color-on-surface);
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+    color: var(--vy-sys-color-on-surface);
+}

@@ -1,0 +1,43 @@
+:root {
+ --vy-sys-color-primary: var(--vy-sys-color-primary-dark);
+ --vy-sys-color-on-primary: var(--vy-sys-color-on-primary-dark);
+ --vy-sys-color-primary-container: var(--vy-sys-color-primary-container-dark);
+ --vy-sys-color-on-primary-container: var(--vy-sys-color-on-primary-container-dark);
+
+ --vy-sys-color-secondary: var(--vy-sys-color-secondary-dark);
+ --vy-sys-color-on-secondary: var(--vy-sys-color-on-secondary-dark);
+ --vy-sys-color-secondary-container: var(--vy-sys-color-secondary-container-dark);
+ --vy-sys-color-on-secondary-container: var(--vy-sys-color-on-secondary-container-dark);
+
+ --vy-sys-color-tertiary: var(--vy-sys-color-tertiary-dark);
+ --vy-sys-color-on-tertiary: var(--vy-sys-color-on-tertiary-dark);
+ --vy-sys-color-tertiary-container: var(--vy-sys-color-tertiary-container-dark);
+ --vy-sys-color-on-tertiary-container: var(--vy-sys-color-on-tertiary-container-dark);
+
+ --vy-sys-color-error: var(--vy-sys-color-error-dark);
+ --vy-sys-color-error-container: var(--vy-sys-color-error-container-dark);
+ --vy-sys-color-on-error: var(--vy-sys-color-on-error-dark);
+ --vy-sys-color-on-error-container: var(--vy-sys-color-on-error-container-dark);
+
+ --vy-sys-color-success: var(--vy-sys-color-success-dark);
+ --vy-sys-color-success-container: var(--vy-sys-color-success-container-dark);
+ --vy-sys-color-on-success: var(--vy-sys-color-on-success-dark);
+ --vy-sys-color-on-success-container: var(--vy-sys-color-on-success-container-dark);
+
+ --vy-sys-color-background: var(--vy-sys-color-background-dark);
+ --vy-sys-color-on-background: var(--vy-sys-color-on-background-dark);
+
+ --vy-sys-color-surface: var(--vy-sys-color-surface-dark);
+ --vy-sys-color-on-surface: var(--vy-sys-color-on-surface-dark);
+ --vy-sys-color-surface-variant: var(--vy-sys-color-surface-variant-dark);
+ --vy-sys-color-on-surface-variant: var(--vy-sys-color-on-surface-variant-dark);
+
+ --vy-sys-color-outline: var(--vy-sys-color-outline-dark);
+ --vy-sys-color-inverse-on-surface: var(--vy-sys-color-inverse-on-surface-dark);
+ --vy-sys-color-inverse-surface: var(--vy-sys-color-inverse-surface-dark);
+ --vy-sys-color-inverse-primary: var(--vy-sys-color-inverse-primary-dark);
+ --vy-sys-color-shadow: var(--vy-sys-color-shadow-dark);
+ --vy-sys-color-surface-tint: var(--vy-sys-color-surface-tint-dark);
+ --vy-sys-color-outline-variant: var(--vy-sys-color-outline-variant-dark);
+ --vy-sys-color-scrim: var(--vy-sys-color-scrim-dark);
+}

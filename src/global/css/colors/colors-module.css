@@ -1,0 +1,313 @@
+/* Primary */
+.vy-primary {
+    background-color: var(--vy-sys-color-primary);
+}
+
+.vy-primary-text {
+    color: var(--vy-sys-color-primary);
+}
+
+.vy-on-primary {
+    background-color: var(--vy-sys-color-on-primary);
+}
+
+.vy-on-primary-text {
+    color: var(--vy-sys-color-on-primary);
+}
+
+.vy-primary-container {
+    background-color: var(--vy-sys-color-primary-container);
+}
+
+.vy-primary-container-text {
+    color: var(--vy-sys-color-primary-container);
+}
+
+.vy-on-primary-container {
+    background-color: var(--vy-sys-color-on-primary-container);
+}
+
+.vy-on-primary-container-text {
+    color: var(--vy-sys-color-on-primary-container);
+}
+
+/* Secondary */
+.vy-secondary {
+    background-color: var(--vy-sys-color-secondary);
+}
+
+.vy-secondary-text {
+    color: var(--vy-sys-color-secondary);
+}
+
+.vy-on-secondary {
+    background-color: var(--vy-sys-color-on-secondary);
+}
+
+.vy-on-secondary-text {
+    color: var(--vy-sys-color-on-secondary);
+}
+
+.vy-secondary-container {
+    background-color: var(--vy-sys-color-secondary-container);
+}
+
+.vy-secondary-container-text {
+    color: var(--vy-sys-color-secondary-container);
+}
+
+.vy-on-secondary-container {
+    background-color: var(--vy-sys-color-on-secondary-container);
+}
+
+.vy-on-secondary-container-text {
+    color: var(--vy-sys-color-on-secondary-container);
+}
+
+/* Tertiary */
+.vy-tertiary {
+    background-color: var(--vy-sys-color-tertiary);
+}
+
+.vy-tertiary-text {
+    color: var(--vy-sys-color-tertiary);
+}
+
+.vy-on-tertiary {
+    background-color: var(--vy-sys-color-on-tertiary);
+}
+
+.vy-on-tertiary-text {
+    color: var(--vy-sys-color-on-tertiary);
+}
+
+.vy-tertiary-container {
+    background-color: var(--vy-sys-color-tertiary-container);
+}
+
+.vy-tertiary-container-text {
+    color: var(--vy-sys-color-tertiary-container);
+}
+
+.vy-on-tertiary-container {
+    background-color: var(--vy-sys-color-on-tertiary-container);
+}
+
+.vy-on-tertiary-container-text {
+    color: var(--vy-sys-color-on-tertiary-container);
+}
+
+/* Error */
+.vy-error {
+    background-color: var(--vy-sys-color-error);
+}
+
+.vy-error-text {
+    color: var(--vy-sys-color-error);
+}
+
+.vy-error-container {
+    background-color: var(--vy-sys-color-error-container);
+}
+
+.vy-error-container-text {
+    color: var(--vy-sys-color-error-container);
+}
+
+.vy-on-error {
+    background-color: var(--vy-sys-color-on-error);
+}
+
+.vy-on-error-text {
+    color: var(--vy-sys-color-on-error);
+}
+
+.vy-on-error-container {
+    background-color: var(--vy-sys-color-on-error-container);
+}
+
+.vy-on-error-container-text {
+    color: var(--vy-sys-color-on-error-container);
+}
+
+/* Success */
+.vy-success {
+    background-color: var(--vy-sys-color-success);
+}
+
+.vy-success-text {
+    color: var(--vy-sys-color-success);
+}
+
+.vy-success-container {
+    background-color: var(--vy-sys-color-success-container);
+}
+
+.vy-success-container-text {
+    color: var(--vy-sys-color-success-container);
+}
+
+.vy-on-success {
+    background-color: var(--vy-sys-color-on-success);
+}
+
+.vy-on-success-text {
+    color: var(--vy-sys-color-on-success);
+}
+
+.vy-on-success-container {
+    background-color: var(--vy-sys-color-on-error-container);
+}
+
+.vy-on-success-container-text {
+    color: var(--vy-sys-color-on-success-container);
+}
+
+/* Background */
+.vy-background {
+    background-color: var(--vy-sys-color-background);
+}
+
+.vy-background-text {
+    color: var(--vy-sys-color-background);
+}
+
+.vy-on-background {
+    background-color: var(--vy-sys-color-on-background);
+}
+
+.vy-on-background-text {
+    color: var(--vy-sys-color-on-background);
+}
+
+/* Surface */
+.vy-surface {
+    background-color: var(--vy-sys-color-surface);
+}
+
+.vy-surface-text {
+    color: var(--vy-sys-color-surface);
+}
+
+.vy-on-surface {
+    background-color: var(--vy-sys-color-on-surface);
+}
+
+.vy-on-surface-text {
+    color: var(--vy-sys-color-on-surface);
+}
+
+.vy-surface-variant {
+    background-color: var(--vy-sys-color-surface-variant);
+}
+
+.vy-surface-variant-text {
+    color: var(--vy-sys-color-surface-variant);
+}
+
+.vy-on-surface-variant {
+    background-color: var(--vy-sys-color-on-surface-variant);
+}
+
+.vy-on-surface-variant-text {
+    color: var(--vy-sys-color-on-surface-variant);
+}
+
+.vy-outline {
+    background-color: var(--vy-sys-color-outline);
+}
+
+.vy-outline-text {
+    color: var(--vy-sys-color-outline);
+}
+
+.vy-inverse-on-surface {
+    background-color: var(--vy-sys-color-inverse-on-surface);
+}
+
+.vy-inverse-on-surface-text {
+    color: var(--vy-sys-color-inverse-on-surface);
+}
+
+.vy-inverse-surface {
+    background-color: var(--vy-sys-color-inverse-surface);
+}
+
+.vy-inverse-surface-text {
+    color: var(--vy-sys-color-inverse-surface);
+}
+
+.vy-inverse-primary {
+    background-color: var(--vy-sys-color-inverse-primary);
+}
+
+.vy-inverse-primary-text {
+    color: var(--vy-sys-color-inverse-primary);
+}
+
+.vy-shadow {
+    background-color: var(--vy-sys-color-shadow);
+}
+
+.vy-shadow-text {
+    color: var(--vy-sys-color-shadow);
+}
+
+.vy-surface-tint {
+    background-color: var(--vy-sys-color-surface-tint);
+}
+
+.vy-surface-tint-text {
+    color: var(--vy-sys-color-surface-tint);
+}
+
+.vy-outline-variant {
+    background-color: var(--vy-sys-color-outline-variant);
+}
+
+.vy-outline-variant-text {
+    color: var(--vy-sys-color-outline-variant);
+}
+
+.vy-scrim {
+    background-color: var(--vy-sys-color-scrim);
+}
+
+.vy-scrim-text {
+    color: var(--vy-sys-color-scrim);
+}
+
+/* Borders */
+.vy-primary-border {
+    border-color: rgb(var(--vy-sys-color-secondary)) !important;
+}
+
+.vy-secondary-border {
+    border-color: rgb(var(--vy-sys-color-primary)) !important;
+}
+
+.vy-surface-border {
+    border-color: rgb(var(--vy-sys-color-surface)) !important;
+}
+
+.vy-error-border {
+    border-color: rgb(var(--vy-sys-color-error)) !important;
+}
+
+.vy-success-border {
+    border-color: rgb(var(--vy-sys-color-success)) !important;
+}
+
+.vy-inverse-surface-fill {
+    fill: rgb(var(--vy-sys-color-inverse-surface));
+}
+
+/* Additional */
+
+.vy-black-text {
+    color: black;
+}
+
+/* .vy-link-dr {
+    color: rgb(var(--vy-link-dr));
+  } */

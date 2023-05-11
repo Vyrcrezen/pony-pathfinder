@@ -1,0 +1,38 @@
+{
+  "name": "vyr_pony-game-solver",
+  "version": "1.0.0",
+  "description": "This application is written for the Pony Panic challenge organized by ICF Technology.",
+  "main": "src/index.tsx",
+  "scripts": {
+    "build": "webpack -w --config webpack.prod.js",
+    "build:dev": "webpack -w --config webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vyrcrezen",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "bootstrap": "^5.2.3",
+    "node-dijkstra": "^2.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "redux-thunk": "^2.4.2",
+    "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "@types/node-dijkstra": "^2.5.3",
+    "@types/react-dom": "^18.2.4",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.1",
+    "postcss-loader": "^7.3.0",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.1"
+  }
+}

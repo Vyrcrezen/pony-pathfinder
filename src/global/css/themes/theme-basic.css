@@ -1,0 +1,32 @@
+:root {
+   
+    --vy-primary-color: 61, 82, 92;
+    --vy-secondary-color: 108, 170, 191;
+    --vy-site-color: 30, 30, 30;
+    --vy-element-color: 230, 246, 251;
+    --vy-selection-color: 156, 120, 173;
+    --vy-white-color: 240, 240, 240;
+
+    --vy-buffered-color: 163, 183, 194;
+
+    --bs-link-color: #a1caff;
+
+    --vy-dark: 30, 30, 30;
+    --vy-bright: 240, 240, 240;
+    --vy-primary: 61, 82, 92;
+    --vy-secondary: 108, 170, 191;
+    --vy-gray: 139, 139, 139;
+    --vy-selection: 156, 120, 173;
+    --vy-selection-dr: 100, 37, 129;
+
+    --vy-good-br: 0, 144, 136;
+    --vy-good-dr: 4, 85, 80;
+    --vy-link-dr: 5, 56, 131;
+    --vy-error-dr: 61, 8, 18;
+    --vy-error-br: 217, 37, 69;
+
+    --vy-tertiary: 86, 113, 125;
+}
+
+ /* --vy-primary-color: 38, 32, 75; */
+/* --vy-primary-color: 201, 217, 235; */
