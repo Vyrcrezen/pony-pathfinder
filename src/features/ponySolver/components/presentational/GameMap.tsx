@@ -8,7 +8,7 @@ export default function GameMap() {
 
     const state = useAppSelector(state => state.ponySolver);
 
-    const alignedMap = (state.obstacleMap ?? []);
+    const alignedMap = (state.resources.obstacleMap ?? []);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -48,12 +48,10 @@ export default function GameMap() {
                 ctx.rotate(Math.PI / 2);   
                 ctx.translate(-canvas.width / 2, -canvas.height / 2);
 
-                ctx.scale(-1, 0);
-
             }
         }
 
-    }, [state.obstacleMap]);
+    }, [state.resources.obstacleMap]);
 
     return <canvas ref={canvasRef} />;
 }

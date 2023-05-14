@@ -1,12 +1,7 @@
-import GameplayState from "../../types/GameplayState"
-import MapResource from "../../types/MapResource"
-import MapState from "../../types/MapState"
+import GameResources from "../../types/GameResources";
+import GameState from "../../types/GameState"
 
 export default interface PonySolverStore {
-    token: string,
-    isPlaying: boolean,
-    gameplayState: GameplayState;
-    mapState?: MapState,
-    mapResources?: MapResource,
-    obstacleMap?: number[][]
+    state: GameState;
+    resources: GameResources;
 }

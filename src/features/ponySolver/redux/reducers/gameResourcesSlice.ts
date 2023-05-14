@@ -7,34 +7,20 @@ import createObstacleMap from "../../util/createObstacleMap";
 import addDynamicAgentsToMap from "../../util/addDynamicAgentsToMap";
 import createGraphFrom2dArray from "../../util/createGraphFrom2dArray";
 
-import dijkstra from 'node-dijkstra';
 import Graph from "node-dijkstra";
 
-const ponySolverSlice = createSlice({
-    name: "ponySolver",
-    initialState: initialPonyStoreState,
+const gameResourcesSlice = createSlice({
+    name: "ponySolver/resources",
+    initialState: initialPonyStoreState.resources,
     reducers: {
         addGameToken: (state, action: PayloadAction<string>) => {
             state.token = action.payload;
-        },
-        toggleIsPlaying: (state) => {
-            state.isPlaying = !state.isPlaying;
         },
         updateMapResource: (state, action: PayloadAction<MapResource>) => {
             state.mapResources = action.payload;
         },
         updateMapState: (state, action: PayloadAction<MapState>) => {
             state.mapState = action.payload;
-        },
-        // GameplayState
-        gsSetisInitialized: (state, action: PayloadAction<boolean>) => {
-            state.gameplayState.isInitialized = action.payload;
-        },
-        gsSetisBeingInitialized: (state, action: PayloadAction<boolean>) => {
-            state.gameplayState.isBeingInitialized = action.payload;
-        },
-        gsPushTaskDescription: (state, action: PayloadAction<string>) => {
-            state.gameplayState.tasks.unshift(action.payload);
         },
 
         generateObstacleMap: (state) => {
@@ -69,16 +55,12 @@ const ponySolverSlice = createSlice({
 
 export const {
     addGameToken,
-    toggleIsPlaying,
     updateMapResource,
     updateMapState,
-    gsSetisInitialized,
-    gsSetisBeingInitialized,
-    gsPushTaskDescription,
     generateObstacleMap,
-} = ponySolverSlice.actions;
+} = gameResourcesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: ReduxStore) => state;
 
-export default ponySolverSlice.reducer;
+export default gameResourcesSlice.reducer;

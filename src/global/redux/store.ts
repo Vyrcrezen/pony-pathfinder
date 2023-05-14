@@ -1,17 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import ReduxStore from "./types/ReduxStore";
-import ponySolverSlice from "../../features/ponySolver/redux/reducers/ponySolverSlice";
+import gameResourcesSlice from "../../features/ponySolver/redux/reducers/gameResourcesSlice";
 import initialPonyStoreState from "../../features/ponySolver/redux/initialPonyStoreState";
 import thunk from "redux-thunk";
+import gameStateSlice from "../../features/ponySolver/redux/reducers/gameStateSlice";
 
 const initialState: ReduxStore = {
     ponySolver: initialPonyStoreState
 }
 
+const combinedPonyReducers = combineReducers({
+    resources: gameResourcesSlice,
+    state: gameStateSlice
+});
+
 const store = configureStore({
     reducer: {
-        ponySolver: ponySolverSlice
+        ponySolver: combinedPonyReducers
     },
     middleware(getDefaultMiddleware) {
         return getDefaultMiddleware().concat(thunk);

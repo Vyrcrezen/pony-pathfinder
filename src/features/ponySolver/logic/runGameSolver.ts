@@ -8,12 +8,13 @@ const GetNextAction: React.FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (state.isPlaying) {
-            if(!state.gameplayState.isInitialized && !state.gameplayState.isBeingInitialized) {
-                dispatch(initializeGameStateThunk({ token: state.token }));
+        if (state.state.isPlaying) {
+            if(!state.state.isInitialized && !state.state.isBeingInitialized) {
+                console.log('dispatching initializeGameStateThunk');
+                dispatch(initializeGameStateThunk({ token: state.resources.token }));
             }
         }
-    }, [state.isPlaying, state.mapState, state.mapResources, state.obstacleMap]);
+    }, [state.state]);
     return null;
 };
 

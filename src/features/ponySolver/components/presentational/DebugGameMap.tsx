@@ -8,7 +8,7 @@ export default function DebugGameMap() {
 
     const state = useAppSelector(state => state.ponySolver);
 
-    const alignedMap = (state.obstacleMap ?? []);
+    const alignedMap = (state.resources.obstacleMap ?? []);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -42,7 +42,7 @@ export default function DebugGameMap() {
             }
         }
 
-    }, [state.obstacleMap]);
+    }, [state.resources.obstacleMap]);
 
     return <canvas ref={canvasRef} />;
 }

@@ -1,14 +1,16 @@
 import { TextField, Button } from '@mui/material';
 import React, { useEffect } from 'react';
-import { addGameToken, toggleIsPlaying } from '../../redux/reducers/ponySolverSlice';
+import { addGameToken } from '../../redux/reducers/gameResourcesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../global/redux/hooks';
 import getNextAction from '../../logic/runGameSolver';
 import GetNextAction from '../../logic/runGameSolver';
+import { gsSetIsInitialized, toggleIsPlaying } from '../../redux/reducers/gameStateSlice';
 
 export default function GameControl() {
 
-    const state = useAppSelector(state => state.ponySolver);
     const dispatch = useAppDispatch();
+
+    const state = useAppSelector(state => state.ponySolver);
 
     console.log('Current Redux store:');
     console.log(state);
@@ -29,7 +31,7 @@ export default function GameControl() {
                         onClick={() => dispatch(toggleIsPlaying())}
                         variant='contained'
                         color='primary'>
-                        {state.isPlaying ? 'Pause' : 'Play'}
+                        {state.state.isPlaying ? 'Pause' : 'Play'}
                     </Button>
                     <Button
                         variant='contained'>

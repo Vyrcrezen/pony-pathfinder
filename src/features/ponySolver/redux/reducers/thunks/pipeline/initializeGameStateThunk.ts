@@ -1,11 +1,12 @@
-import { generateObstacleMap, gsPushTaskDescription, gsSetisBeingInitialized, gsSetisInitialized } from "../../ponySolverSlice";
+import { generateObstacleMap} from "../../gameResourcesSlice";
 import updateMapStateThunk from "../fetchDataThunk/updateMapStateThunk";
 import { AppDispatch } from "../../../../../../global/redux/store";
 import updateMapResourceThunk from "../fetchDataThunk/updateMapResourceThunk";
+import { gsPushTaskDescription, gsSetIsBeingInitialized, gsSetIsInitialized } from "../../gameStateSlice";
 
 const initializeGameStateThunk = ({token}: {token: string}) => async (dispatch: AppDispatch) => {
 
-    dispatch(gsSetisBeingInitialized(true));
+    dispatch(gsSetIsBeingInitialized(true));
 
     dispatch(gsPushTaskDescription("Fetching mapState"));
     await dispatch(updateMapStateThunk({ token }));
@@ -13,14 +14,14 @@ const initializeGameStateThunk = ({token}: {token: string}) => async (dispatch: 
 
     dispatch(gsPushTaskDescription("Fetching mapResources"));
     await dispatch(updateMapResourceThunk({ token }))
-    dispatch(gsPushTaskDescription("mapState Loaded"));
+    dispatch(gsPushTaskDescription("mapResources Loaded"));
 
     dispatch(gsPushTaskDescription("generating obstacleMap"));
     await dispatch(generateObstacleMap());
     dispatch(gsPushTaskDescription("obstacleMap generated"));
 
-    dispatch(gsSetisBeingInitialized(false));
-    dispatch(gsSetisInitialized(true));
+    dispatch(gsSetIsBeingInitialized(false));
+    dispatch(gsSetIsInitialized(true));
 }
 
 export default initializeGameStateThunk;
