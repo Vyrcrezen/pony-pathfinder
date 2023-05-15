@@ -2,9 +2,9 @@ import { TextField, Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { addGameToken } from '../../redux/reducers/gameResourcesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../global/redux/hooks';
-import getNextAction from '../../logic/runGameSolver';
-import GetNextAction from '../../logic/runGameSolver';
-import { gsSetIsInitialized, toggleIsPlaying } from '../../redux/reducers/gameStateSlice';
+import getNextAction from '../../logic/GameSolver';
+import GameSolver from '../../logic/GameSolver';
+import { setIsInitialized, setIsStepping, toggleIsPlaying } from '../../redux/reducers/gameStateSlice';
 
 export default function GameControl() {
 
@@ -34,12 +34,20 @@ export default function GameControl() {
                         {state.state.isPlaying ? 'Pause' : 'Play'}
                     </Button>
                     <Button
+                        onClick={() => dispatch(setIsStepping(true))}
+                        variant='contained'
+                        color='primary'
+                        disabled={state.state.isPlaying ? true : undefined}
+                    >
+                        {'Step'}
+                    </Button>
+                    <Button
                         variant='contained'>
                         Reset
                     </Button>
                 </div>
             </div>
-            <GetNextAction />
+            <GameSolver />
         </div>
     );
 }

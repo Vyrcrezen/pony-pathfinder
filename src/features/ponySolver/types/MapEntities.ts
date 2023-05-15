@@ -4,7 +4,8 @@ const MapEntities = {
     HERO: 2,
     ENEMY: 3,
     BULLET: 4,
-    TREASURE: 5
+    TREASURE: 5,
+    COLLECTED_TREASURE: 6,
 }
 
 export default MapEntities;

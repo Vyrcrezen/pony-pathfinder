@@ -4,25 +4,31 @@ export default interface GameState {
     needsNewGame: boolean;
     isPlaying: boolean;
 
+    isStepping: boolean;
+    isStepFinished: boolean;
+
     isInitialized: boolean;
     isBeingInitialized: boolean;
     initTasks: {
-        isMapStateFetched: boolean
+        isMapResourcesFetched: boolean,
+        isInitMapStateFetched: boolean,
+        isBaseMapGenerated: boolean,
     }
 
     isRunning: boolean;
     isLevelOver: boolean;
     runtimeTasks: {
-        isMapResourceFetched: boolean,
-        isDynamicMapUpdated: boolean,
-        isPathingGraphCreated: boolean,
+        isMapStateFetched: boolean,
+        isMapStatusUpdated: boolean,
+        isGameMapUpdated: boolean,
+        isGameMapGraphCreated: boolean,
         isPathCalculated: boolean,
         hasHeroActed: boolean,
     }
 
-    isNextLoaded: boolean;
-    isNextBeingLoaded: boolean;
-    resetTasks: {
+    isAdvancingFinished: boolean;
+    isAdvancingLevel: boolean;
+    advanceTasks: {
         isPlaythroughStateUpdated: boolean,
         isNextLevelReady: boolean
     }

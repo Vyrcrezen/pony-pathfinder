@@ -2,7 +2,7 @@ import MapEntities from "../types/MapEntities";
 
 export default function createGraphFrom2dArray(array: number[][]) {
      
-    if (!Array.isArray(array) || !Array.isArray(array[0])) throw new Error('createGraphFrom2dArray received an rgument which isn\'t an array');
+    if (!Array.isArray(array) || !Array.isArray(array[0])) throw new Error('createGraphFrom2dArray received an argument which isn\'t an array');
 
     const resultGraph: {[prop: string]: { [prop: string]: number }} = {};
 

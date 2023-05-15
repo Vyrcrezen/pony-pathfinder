@@ -8,7 +8,7 @@ export default function DebugGameMap() {
 
     const state = useAppSelector(state => state.ponySolver);
 
-    const alignedMap = (state.resources.obstacleMap ?? []);
+    const alignedMap = (state.resources.gameMap ?? []);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -17,10 +17,6 @@ export default function DebugGameMap() {
         if (canvasRef.current && Array.isArray(alignedMap) && Array.isArray(alignedMap[0])) {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
-
-            console.log('ctx');
-            console.log(ctx);
-
 
             if (ctx) {
                 const cellSize = 20;
@@ -42,7 +38,7 @@ export default function DebugGameMap() {
             }
         }
 
-    }, [state.resources.obstacleMap]);
+    }, [state.resources.gameMap]);
 
     return <canvas ref={canvasRef} />;
 }

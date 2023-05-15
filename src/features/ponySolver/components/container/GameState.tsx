@@ -11,11 +11,13 @@ export default function GameState() {
                 Current state: <span className="fs-4">{state.state.taskLog[0]}</span>
 
             </p>
-            <span>{state.state.taskLog[1] ?? ''}</span>
-            <br />
-            <span>{state.state.taskLog[2] ?? ''}</span>
-            <br />
-            <span>{state.state.taskLog[3] ?? ''}</span>
+            <ul className="list-unstyled m-0 p-0">
+                <li>{state.state.taskLog[1] ?? ''}</li>
+                <li>{state.state.taskLog[2] ?? ''}</li>
+                <li>{state.state.taskLog[3] ?? ''}</li>
+                <li>{state.state.taskLog[4] ?? ''}</li>
+                <li>{state.state.taskLog[5] ?? ''}</li>
+            </ul>
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import serverAddress from "../../../global/serverAddress";
+import ApproveHeroTurnResponse from "../types/ApproveHeroTurnResponse";
 import HeroAction from "../types/HeroAction";
-import MapResource from "../types/MapResource";
 
 export default async function postApproveHeroTurn(token: string, action: HeroAction, heroId: number) {
     try {
-        const result = await fetch(`${serverAddress.address}/playGameApi/v1/play/mapResource`, {
+        const result = await fetch(`${serverAddress.address}/playGameApi/v1/play/approveHeroTurn`, {
             method: 'POST',
             headers: {
                 "story-playthrough-token": token,
@@ -20,7 +20,7 @@ export default async function postApproveHeroTurn(token: string, action: HeroAct
         const data = await result.json();
         console.log(data);
 
-        return data as MapResource;
+        return data as ApproveHeroTurnResponse;
     }
     catch (err) {
         console.log(err);

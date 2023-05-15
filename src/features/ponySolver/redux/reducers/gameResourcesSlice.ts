@@ -3,11 +3,13 @@ import ReduxStore from "../../../../global/redux/types/ReduxStore";
 import initialPonyStoreState from "../initialPonyStoreState";
 import MapState from "../../types/MapState";
 import MapResource from "../../types/MapResource";
-import createObstacleMap from "../../util/createObstacleMap";
+import createBaseMap from "../../util/createBaseMap";
 import addDynamicAgentsToMap from "../../util/addDynamicAgentsToMap";
 import createGraphFrom2dArray from "../../util/createGraphFrom2dArray";
 
-import Graph from "node-dijkstra";
+import getClosestTarget from "../../util/getClosestTarget";
+import ApproveHeroTurnResponse from "../../types/ApproveHeroTurnResponse";
+import PlaythroughState from "../../types/PlaythroughState";
 
 const gameResourcesSlice = createSlice({
     name: "ponySolver/resources",
@@ -22,33 +24,43 @@ const gameResourcesSlice = createSlice({
         updateMapState: (state, action: PayloadAction<MapState>) => {
             state.mapState = action.payload;
         },
-
-        generateObstacleMap: (state) => {
+        updatePlaythroughState: (state, action: PayloadAction<PlaythroughState>) => {
+            state.playthroughState = action.payload;
+        },
+        updateApproveHeroTurnResponse: (state, action: PayloadAction<ApproveHeroTurnResponse>) => {
+            state.approveHeroTurnResponse = action.payload;
+        },
+        generateBaseMap: (state) => {
             if (!state.mapState || !state.mapResources) return;
 
             const width = state.mapState.map.width;
             const height = state.mapState.map.height;
             const obstacles = state.mapResources.compressedObstacles.coordinateMap;
 
-            const obstacleMap = createObstacleMap({ height, width, obstacles });
-            const dynamicUpdatedMap = addDynamicAgentsToMap(obstacleMap, state.mapState);
-
-            const pathingGraph = createGraphFrom2dArray(dynamicUpdatedMap);
-
-            console.log(dynamicUpdatedMap);
-            console.log(pathingGraph);
-
-            const graph = new Graph(pathingGraph);
-            console.log(graph);
+            state.baseMap = createBaseMap({ height, width, obstacles });
+        },
+        generateGameMap: (state) => {
+            if (!state.mapState || !state.baseMap) return;
+            state.gameMap = addDynamicAgentsToMap(state.baseMap, state.mapState);
+        },
+        generateGameMapGraph: (state) => {
+            if (!state.gameMap) return;
+            state.gameMapGraph = createGraphFrom2dArray(state.gameMap);
+        },
+        generateHeroPath: (state) => {
+            if (!state.mapState || !state.gameMapGraph) return;
 
             const heroGraphPoint = `${state.mapState.heroes[0].position.x}-${state.mapState.heroes[0].position.y}`;
-            const treasureGraphPoint = `${state.mapState.map.treasures[0].position.x}-${state.mapState.map.treasures[0].position.y}`
+            const targetGraphPoints = state.mapState.map.treasures.reduce((acc, treasure) => {
+                if (!treasure.collectedByHeroId) {
+                    acc.push(`${treasure.position.x}-${treasure.position.y}`);
+                }
+                return acc;
+            }, [] as string[]);
 
-            const pathResult = graph.path(heroGraphPoint, treasureGraphPoint);
-            console.log('pathResult');
-            console.log(pathResult);
-            
-            state.obstacleMap = dynamicUpdatedMap;
+            const closestTarget = getClosestTarget(state.gameMapGraph, heroGraphPoint, targetGraphPoints);
+
+            state.heroPath = closestTarget;
         },
     },
 });
@@ -57,7 +69,11 @@ export const {
     addGameToken,
     updateMapResource,
     updateMapState,
-    generateObstacleMap,
+    updateApproveHeroTurnResponse,
+    generateBaseMap,
+    generateGameMap,
+    generateGameMapGraph,
+    generateHeroPath,
 } = gameResourcesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

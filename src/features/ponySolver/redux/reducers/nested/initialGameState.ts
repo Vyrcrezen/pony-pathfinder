@@ -1,29 +1,36 @@
+import GameState from "../../../types/GameState";
 
-const initialGameState = {
+const initialGameState: GameState = {
     taskLog: ["Not started"],
 
     needsNewGame: false,
     isPlaying: false,
 
+    isStepFinished: false,
+    isStepping: false,
+
     isInitialized: false,
     isBeingInitialized: false,
     initTasks: {
-        isMapStateFetched: false
+        isMapResourcesFetched: false,
+        isInitMapStateFetched: false,
+        isBaseMapGenerated: false
     },
 
     isRunning: false,
     isLevelOver: false,
     runtimeTasks: {
-        isMapResourceFetched: false,
-        isDynamicMapUpdated: false,
-        isPathingGraphCreated: false,
+        isMapStateFetched: false,
+        isMapStatusUpdated: false,
+        isGameMapUpdated: false,
+        isGameMapGraphCreated: false,
         isPathCalculated: false,
         hasHeroActed: false,
     },
 
-    isNextLoaded: false,
-    isNextBeingLoaded: false,
-    resetTasks: {
+    isAdvancingFinished: true,
+    isAdvancingLevel: false,
+    advanceTasks: {
         isPlaythroughStateUpdated: false,
         isNextLevelReady: false
     }

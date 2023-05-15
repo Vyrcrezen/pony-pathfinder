@@ -1,9 +1,14 @@
+import GameResources from "../../../types/GameResources";
 
-const initialGameResources = {
+const initialGameResources: GameResources = {
     token: "",
     mapState: undefined,
     mapResources: undefined,
-    obstacleMap: [],
+    approveHeroTurnResponse: undefined,
+    baseMap: [],
+    gameMap: [],
+    gameMapGraph: {},
+    heroPath: undefined
 }
 
 export default initialGameResources;
