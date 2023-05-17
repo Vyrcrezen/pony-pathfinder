@@ -10,7 +10,7 @@ export default interface MapState {
         width: number;
         height: number;
         elapsedTickCount: number;
-        status: "CREATED" | "PLAYING" | "WON";
+        status: "CREATED" | "PLAYING" | "WON" | "LOST";
         treasures: Treause[];
         enemies: Enemy[];
         bullets: Bullet[];

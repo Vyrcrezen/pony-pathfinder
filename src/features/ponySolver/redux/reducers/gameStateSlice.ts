@@ -26,6 +26,7 @@ const gameStateSlice = createSlice({
         },
         pushTaskDescription: (state, action: PayloadAction<string>) => {
             state.taskLog.unshift(action.payload);
+            if (state.taskLog.length > 100) state.taskLog.length = 100;
         },
         toggleIsPlaying: (state) => {
             state.isPlaying = !state.isPlaying;

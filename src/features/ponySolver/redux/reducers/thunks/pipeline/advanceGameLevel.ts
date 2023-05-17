@@ -6,6 +6,7 @@ import { setIsAdvancingFinished, setIsAdvancingLevel, setIsBaseMapGenerated, set
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import updatePlaythroughStateThunk from "../apiThunk/updatePlaythroughStateThunk";
 import postNextLevelThunk from "../apiThunk/postNextLevelThunk";
+import postResetLevelThunk from "../apiThunk/postResetLevelThunk";
 
 const advanceGameLevel =
     ({ gameState, gameResources }: { gameState: GameState, gameResources: GameResources }) => async (dispatch: AppDispatch) => {
@@ -20,7 +21,9 @@ const advanceGameLevel =
             dispatch(setIsPlaythroughStateUpdated(true));
         }
         else if (gameState.advanceTasks.isPlaythroughStateUpdated && !gameState.advanceTasks.isNextLevelReady) {
-            await gameStepActionWrapper(dispatch, gameState, 'Getting next level', postNextLevelThunk, { token });
+            if ( gameResources.mapState?.map.status === "WON" ) await gameStepActionWrapper(dispatch, gameState, 'Getting next level', postNextLevelThunk, { token });
+            else await gameStepActionWrapper(dispatch, gameState, 'Resetting current level :(', postResetLevelThunk, { token });
+            
             dispatch(setSteppingFinished(true));
             dispatch(setIsNextLevelReady(true));
 

@@ -1,11 +1,9 @@
 import { generateBaseMap, generateGameMap, generateGameMapGraph, generateHeroPath } from "../../gameResourcesSlice";
 import updateMapStateThunk from "../apiThunk/updateMapStateThunk";
 import { AppDispatch } from "../../../../../../global/redux/store";
-import updateMapResourceThunk from "../apiThunk/updateMapResourceThunk";
-import {setHasHeroActed, setIsBeingInitialized, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsLevelOver, setIsMapStateFetched, setIsMapResourcesFetched, setIsPathCalculated, setIsRunning, setSteppingFinished, pushTaskDescription, setIsMapStatusUpdated, setIsAdvancingFinished, setIsNextLevelReady, setIsPlaythroughStateUpdated} from "../../gameStateSlice";
+import {setHasHeroActed, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsLevelOver, setIsMapStateFetched, setIsPathCalculated, setIsRunning, setSteppingFinished, pushTaskDescription, setIsMapStatusUpdated, setIsAdvancingFinished, setIsNextLevelReady, setIsPlaythroughStateUpdated} from "../../gameStateSlice";
 import GameState from "../../../../types/GameState";
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
-import getClosestTarget from "../../../../util/getClosestTarget";
 import performHeroActionThunk from "../apiThunk/performHeroActionThunk";
 import GameResources from "../../../../types/GameResources";
 
@@ -23,7 +21,7 @@ const runGameplayLoopThunk =
         }
         if (gameState.runtimeTasks.isMapStateFetched && !gameState.runtimeTasks.isMapStatusUpdated) {
             dispatch(pushTaskDescription("Checking map status"));
-            if (gameResources.mapState?.map.status === "WON") {
+            if (gameResources.mapState?.map.status === "WON" || gameResources.mapState?.map.status === "LOST") {
                 dispatch(setIsLevelOver(true));
                 dispatch(setIsAdvancingFinished(false));
 
@@ -31,7 +29,6 @@ const runGameplayLoopThunk =
                 dispatch(setIsNextLevelReady(false));
 
                 dispatch(pushTaskDescription("Map status is won, laoding next level..."));
-                
             }
             
             dispatch(setSteppingFinished(true));

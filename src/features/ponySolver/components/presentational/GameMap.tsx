@@ -21,7 +21,7 @@ export default function GameMap() {
             const ctx = canvas.getContext('2d');
 
             if (ctx) {
-                const cellSize = 20;
+                const cellSize = 40;
                 const numRows = alignedMap.length;
                 const numCols = alignedMap[0].length;
 
