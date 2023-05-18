@@ -20,6 +20,14 @@ module.exports = {
         test: /.css$/,
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader',
+        options: {
+            mimetype: 'image/jpg',
+            limit: 1 * 1024,
+        },
+    },
     ],
   },
   plugins: [

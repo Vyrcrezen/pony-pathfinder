@@ -1,6 +1,6 @@
 import MapEntities from "../types/MapEntities";
 
-export default function createBaseMap({width, height, obstacles}: { width: number, height: number, obstacles: {[props: string]: number[]} }) {
+export default function createBaseMap({width, height, obstacles}: { width: number, height: number, obstacles: {[props: string]: number[]} }): number[][] {
 
     try {
         const obstacleMap = Array.from({ length: height }, () => new Array(width).fill(0));

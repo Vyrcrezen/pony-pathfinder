@@ -1,6 +1,7 @@
 import Enemy from "../types/Enemy";
 import GameResources from "../types/GameResources";
 import HeroAction from "../types/HeroAction";
+import getMovementDirection from "./getMovementDirection";
 
 export default function selectHeroAction({ heroPath, gameResources }: { heroPath: string[], gameResources: GameResources }) {
 
@@ -12,11 +13,7 @@ export default function selectHeroAction({ heroPath, gameResources }: { heroPath
     console.log(gameResources);
 
     // Determine the intended movement
-    let intendedAction: HeroAction = "USE_SHIELD";
-    if (pathCoordinates[0].x > pathCoordinates[1].x) intendedAction = "MOVE_LEFT";
-    else if (pathCoordinates[0].x < pathCoordinates[1].x) intendedAction = "MOVE_RIGHT";
-    else if (pathCoordinates[0].y > pathCoordinates[1].y) intendedAction = "MOVE_DOWN";
-    else if (pathCoordinates[0].y < pathCoordinates[1].y) intendedAction = "MOVE_UP";
+    let intendedAction: HeroAction = getMovementDirection(pathCoordinates[0], pathCoordinates[1]);
 
     let targetEnemy: Enemy;
     // Find enemies to hit

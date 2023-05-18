@@ -5,6 +5,7 @@ import gameResourcesSlice from "../../features/ponySolver/redux/reducers/gameRes
 import initialPonyStoreState from "../../features/ponySolver/redux/initialPonyStoreState";
 import thunk from "redux-thunk";
 import gameStateSlice from "../../features/ponySolver/redux/reducers/gameStateSlice";
+import gameUserInputSlice from "../../features/ponySolver/redux/reducers/gameUserInputSlice";
 
 const initialState: ReduxStore = {
     ponySolver: initialPonyStoreState
@@ -12,7 +13,8 @@ const initialState: ReduxStore = {
 
 const combinedPonyReducers = combineReducers({
     resources: gameResourcesSlice,
-    state: gameStateSlice
+    state: gameStateSlice,
+    userInput: gameUserInputSlice
 });
 
 const store = configureStore({
