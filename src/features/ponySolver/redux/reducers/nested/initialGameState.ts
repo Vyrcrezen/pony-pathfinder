@@ -23,6 +23,7 @@ const initialGameState: GameState = {
         isMapStateFetched: false,
         isMapStatusUpdated: false,
         isGameMapUpdated: false,
+        isHeatMapUpdated: false,
         isGameMapGraphCreated: false,
         isPathCalculated: false,
         hasHeroActed: false,

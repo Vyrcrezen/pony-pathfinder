@@ -15,7 +15,7 @@ export default function GameSolverUi() {
                     <GameControl />
                     <GameState />
                     <PathingMap />
-                    <DebugReduxStore />
+                    {/* <DebugReduxStore /> */}
                 </div>
             </div>
         </ThemeProvider>

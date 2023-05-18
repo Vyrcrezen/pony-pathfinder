@@ -1,7 +1,7 @@
-import { generateBaseMap, generateGameMap, generateGameMapGraph, generateHeroPath } from "../../gameResourcesSlice";
+import { generateBaseMap, generateGameMap, generateGameMapGraph, generateHeatMap, generateHeroPath } from "../../gameResourcesSlice";
 import updateMapStateThunk from "../apiThunk/updateMapStateThunk";
 import { AppDispatch } from "../../../../../../global/redux/store";
-import {setHasHeroActed, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsLevelOver, setIsMapStateFetched, setIsPathCalculated, setIsRunning, setSteppingFinished, pushTaskDescription, setIsMapStatusUpdated, setIsAdvancingFinished, setIsNextLevelReady, setIsPlaythroughStateUpdated} from "../../gameStateSlice";
+import {setHasHeroActed, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsLevelOver, setIsMapStateFetched, setIsPathCalculated, setIsRunning, setSteppingFinished, pushTaskDescription, setIsMapStatusUpdated, setIsAdvancingFinished, setIsNextLevelReady, setIsPlaythroughStateUpdated, setIsHeatMapUpdated} from "../../gameStateSlice";
 import GameState from "../../../../types/GameState";
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import performHeroActionThunk from "../apiThunk/performHeroActionThunk";
@@ -39,7 +39,12 @@ const runGameplayLoopThunk =
             dispatch(setSteppingFinished(true));
             dispatch(setIsGameMapUpdated(true));
         }
-        if (gameState.runtimeTasks.isGameMapUpdated && !gameState.runtimeTasks.isGameMapGraphCreated) {
+        if (gameState.runtimeTasks.isGameMapUpdated && !gameState.runtimeTasks.isHeatMapUpdated) {
+            gameStepActionWrapper(dispatch, gameState, 'Generating HeatMap', generateHeatMap);
+            dispatch(setSteppingFinished(true));
+            dispatch(setIsHeatMapUpdated(true));
+        }
+        if (gameState.runtimeTasks.isHeatMapUpdated && !gameState.runtimeTasks.isGameMapGraphCreated) {
             gameStepActionWrapper(dispatch, gameState, 'Generating gameMap Graph', generateGameMapGraph);
             dispatch(setSteppingFinished(true));
             dispatch(setIsGameMapGraphCreated(true));
@@ -61,6 +66,7 @@ const runGameplayLoopThunk =
             dispatch(setIsMapStateFetched(false));
             dispatch(setIsMapStatusUpdated(false));
             dispatch(setIsGameMapUpdated(false));
+            dispatch(setIsHeatMapUpdated(false));
             dispatch(setIsGameMapGraphCreated(false));
             dispatch(setIsPathCalculated(false));
             dispatch(setHasHeroActed(false));

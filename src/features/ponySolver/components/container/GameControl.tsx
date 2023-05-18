@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../global/redux/hooks';
 import getNextAction from '../../logic/GameSolver';
 import GameSolver from '../../logic/GameSolver';
 import { setIsInitialized, setIsStepping, toggleIsPlaying } from '../../redux/reducers/gameStateSlice';
+import vyFloodFill from '../../util/vyFloodFill';
 
 export default function GameControl() {
 
@@ -14,6 +15,9 @@ export default function GameControl() {
 
     console.log('Current Redux store:');
     console.log(state);
+
+    // console.log('Testing Flood fill');
+    // vyFloodFill({ mapWidth: 10, mapHeight: 10, startingCell: { x: 5, y: 5 }, heatSourceCell: { x: 5, y: 5 }, cutoffThreshold: 0.1 });
 
     return (
         <div className='d-flex flex-column rounded w-75 rounded vy-secondary'>

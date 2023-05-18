@@ -1,6 +1,6 @@
 import updateMapStateThunk from "../apiThunk/updateMapStateThunk";
 import { AppDispatch } from "../../../../../../global/redux/store";
-import {setHasHeroActed, setIsBaseMapGenerated, setIsBeingInitialized, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsInitMapStateFetched, setIsInitialized, setIsLevelOver, setIsMapResourcesFetched, setIsMapStateFetched, setIsMapStatusUpdated, setIsPathCalculated, setSteppingFinished} from "../../gameStateSlice";
+import {setHasHeroActed, setIsBaseMapGenerated, setIsBeingInitialized, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsHeatMapUpdated, setIsInitMapStateFetched, setIsInitialized, setIsLevelOver, setIsMapResourcesFetched, setIsMapStateFetched, setIsMapStatusUpdated, setIsPathCalculated, setSteppingFinished} from "../../gameStateSlice";
 import GameState from "../../../../types/GameState";
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import { generateBaseMap } from "../../gameResourcesSlice";
@@ -37,6 +37,7 @@ const initializeGameStateThunk =
             dispatch(setIsMapStateFetched(false));
             dispatch(setIsMapStatusUpdated(false));
             dispatch(setIsGameMapUpdated(false));
+            dispatch(setIsHeatMapUpdated(false));
             dispatch(setIsGameMapGraphCreated(false));
             dispatch(setIsPathCalculated(false));
             dispatch(setHasHeroActed(false));

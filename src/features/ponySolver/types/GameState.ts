@@ -21,6 +21,7 @@ export default interface GameState {
         isMapStateFetched: boolean,
         isMapStatusUpdated: boolean,
         isGameMapUpdated: boolean,
+        isHeatMapUpdated: boolean,
         isGameMapGraphCreated: boolean,
         isPathCalculated: boolean,
         hasHeroActed: boolean,

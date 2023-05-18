@@ -22,16 +22,14 @@ export default function selectHeroAction({ heroPath, gameResources }: { heroPath
     // Find enemies to hit
     gameResources.mapState?.map.enemies.forEach(enemy => {
         if (enemy.health > 0) {
-            if (pathCoordinates[0].x + 2 === enemy.position.x && pathCoordinates[0].y === enemy.position.y) intendedAction = "KICK_RIGHT";
-            else if (pathCoordinates[0].x - 2 === enemy.position.x && pathCoordinates[0].y === enemy.position.y) intendedAction = "KICK_LEFT";
-            else if (pathCoordinates[0].y + 2 === enemy.position.y && pathCoordinates[0].x === enemy.position.x) intendedAction = "KICK_UP";
-            else if (pathCoordinates[0].y - 2 === enemy.position.y && pathCoordinates[0].x === enemy.position.x) intendedAction = "KICK_DOWN";
+            if (pathCoordinates[0].x + 2 === enemy.position.x && pathCoordinates[0].y === enemy.position.y && intendedAction === "MOVE_RIGHT") intendedAction = "KICK_RIGHT";
+            else if (pathCoordinates[0].x - 2 === enemy.position.x && pathCoordinates[0].y === enemy.position.y && intendedAction === "MOVE_LEFT") intendedAction = "KICK_LEFT";
+            else if (pathCoordinates[0].y + 2 === enemy.position.y && pathCoordinates[0].x === enemy.position.x && intendedAction === "MOVE_UP") intendedAction = "KICK_UP";
+            else if (pathCoordinates[0].y - 2 === enemy.position.y && pathCoordinates[0].x === enemy.position.x && intendedAction === "MOVE_DOWN") intendedAction = "KICK_DOWN";
         }
     });
 
-    // Find enemies to kick
-
-    // Find bullets to shield against
+    // Defend against bullets that are next to the hero, and they are heading towards each other
     gameResources.mapState?.map.bullets.forEach(bullet => {
         if (
             (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "LEFT" && intendedAction === "MOVE_RIGHT")
@@ -41,13 +39,31 @@ export default function selectHeroAction({ heroPath, gameResources }: { heroPath
         ) intendedAction = "USE_SHIELD";
     });
 
-    // Prevent running into bullets
+    // Prevent running to a position, where the bullet is going to be next turn, if they are heading towards each other
     gameResources.mapState?.map.bullets.forEach(bullet => {
         if (
             (pathCoordinates[0].x + 2 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "LEFT" && intendedAction === "MOVE_RIGHT")
             || (pathCoordinates[0].x - 2 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "RIGHT" && intendedAction === "MOVE_LEFT")
             || (pathCoordinates[0].y + 2 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "UP" && intendedAction === "MOVE_DOWN")
             || (pathCoordinates[0].y - 2 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "DOWN" && intendedAction === "MOVE_UP")
+        ) intendedAction = "USE_SHIELD";
+    });
+
+    // Prevent running into bullets that are next to the hero diagonally
+    gameResources.mapState?.map.bullets.forEach(bullet => {
+        if (
+            (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y + 1 === bullet.position.y && bullet.direction === "DOWN" && intendedAction === "MOVE_RIGHT")
+            || (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y + 1 === bullet.position.y && bullet.direction === "LEFT" && intendedAction === "MOVE_UP")
+
+            || (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y - 1 === bullet.position.y && bullet.direction === "UP" && intendedAction === "MOVE_RIGHT")
+            || (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y - 1 === bullet.position.y && bullet.direction === "LEFT" && intendedAction === "MOVE_DOWN")
+
+            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x - 1  === bullet.position.x && bullet.direction === "RIGHT" && intendedAction === "MOVE_DOWN")
+            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x - 1  === bullet.position.x && bullet.direction === "UP" && intendedAction === "MOVE_LEFT")
+
+
+            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x - 1 === bullet.position.x && bullet.direction === "DOWN" && intendedAction === "MOVE_LEFT")
+            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x - 1 === bullet.position.x && bullet.direction === "RIGHT" && intendedAction === "MOVE_UP")
         ) intendedAction = "USE_SHIELD";
     });
 

@@ -11,6 +11,7 @@ export default interface GameResources {
     approveHeroTurnResponse?: ApproveHeroTurnResponse,
     playthroughState?: PlaythroughState,
     baseMap?: number[][],
+    heatMap?: number[][],
     gameMap?: number[][],
     gameMapGraph?: {
         [prop: string]: {

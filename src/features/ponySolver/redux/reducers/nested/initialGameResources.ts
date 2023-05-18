@@ -6,6 +6,7 @@ const initialGameResources: GameResources = {
     mapResources: undefined,
     approveHeroTurnResponse: undefined,
     baseMap: [],
+    heatMap: [],
     gameMap: [],
     gameMapGraph: {},
     heroPath: undefined

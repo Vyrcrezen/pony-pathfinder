@@ -58,6 +58,9 @@ const gameStateSlice = createSlice({
         setIsGameMapUpdated: (state, action: PayloadAction<boolean>) => {
             state.runtimeTasks.isGameMapUpdated = action.payload;
         },
+        setIsHeatMapUpdated: (state, action: PayloadAction<boolean>) => {
+            state.runtimeTasks.isHeatMapUpdated = action.payload;
+        },
         setIsGameMapGraphCreated: (state, action: PayloadAction<boolean>) => {
             state.runtimeTasks.isGameMapGraphCreated = action.payload;
         },
@@ -94,6 +97,7 @@ export const {
     setIsMapStateFetched,
     setIsMapStatusUpdated,
     setIsGameMapUpdated,
+    setIsHeatMapUpdated,
     setIsGameMapGraphCreated,
     setIsPathCalculated,
     setHasHeroActed,
