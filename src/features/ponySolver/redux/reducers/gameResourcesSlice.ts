@@ -7,12 +7,16 @@ import createBaseMap from "../../util/createBaseMap";
 import addDynamicAgentsToMap from "../../util/addDynamicAgentsToMap";
 import createGraphFrom2dArray from "../../util/createGraphFrom2dArray";
 
-import getClosestTarget from "../../util/getClosestTarget";
+import getPathToClosestTarget from "../../util/getPathToClosestTarget";
 import ApproveHeroTurnResponse from "../../types/ApproveHeroTurnResponse";
 import PlaythroughState from "../../types/PlaythroughState";
 import vyFloodFill from "../../util/vyFloodFill";
 import _ from 'lodash';
 import vyCombineHeatMaps from "../../util/vyCombineHeatMaps";
+import getDefaultGameMap from "../../initializers/getDefaultGameMap";
+import getDefaultGameState from "../../initializers/getDefaultGameState";
+import getDefaultGameResources from "../../initializers/getDefaultGameResources";
+import getHeroAction from "../../util/getHeroAction";
 
 const gameResourcesSlice = createSlice({
     name: "ponySolver/resources",
@@ -44,21 +48,28 @@ const gameResourcesSlice = createSlice({
         },
         generateGameMap: (state) => {
             if (!state.mapState || !state.baseMap) return;
-            state.gameMap = addDynamicAgentsToMap(state.baseMap, state.mapState);
+            state.gameMap = addDynamicAgentsToMap(_.cloneDeep(state.mapState));
         },
         generateHeatMap: (state) => {
             if (!state.mapState ) return;
 
-            const blankHeatMap = Array.from({length: state.mapState!.map.height}, () => new Array(state.mapState!.map.width).fill(0));
+            const blankHeatMap: number[][] = Array.from({length: state.mapState!.map.height}, () => new Array(state.mapState!.map.width).fill(0));
 
-            const enemyHeatMaps = state.mapState.map.enemies.map(enemy => vyFloodFill({
-                mapWidth: state.mapState!.map.width,
-                mapHeight: state.mapState!.map.height,
-                startingCell: { x: enemy.position.x, y: enemy.position.y },
-                heatSourceCell: { x: enemy.position.x, y: enemy.position.y },
-                cutoffThreshold: 0.1,
-                valueMultiplicationFactor: enemy.onTouchDamage
-            }));
+            const enemyHeatMaps: number[][][] = state.mapState.map.enemies.reduce((acc, enemy) => {
+
+                if ( enemy.health > 0 ) {
+                    acc.push(vyFloodFill({
+                        mapWidth: state.mapState!.map.width,
+                        mapHeight: state.mapState!.map.height,
+                        startingCell: { x: enemy.position.x, y: enemy.position.y },
+                        heatSourceCell: { x: enemy.position.x, y: enemy.position.y },
+                        cutoffThreshold: 0.1,
+                        valueMultiplicationFactor: enemy.onTouchDamage
+                    }));
+                }
+
+                return acc;
+            }, [] as number[][][]);
 
             const bulletHeatMaps = state.mapState.map.bullets.map(bullet => vyFloodFill({
                 mapWidth: state.mapState!.map.width,
@@ -71,8 +82,8 @@ const gameResourcesSlice = createSlice({
 
             const combinedHeatMap = [blankHeatMap, ...enemyHeatMaps, ...bulletHeatMaps];
 
-            console.log("combinedHeatMap");
-            console.log(combinedHeatMap);
+            // console.log("combinedHeatMap");
+            // console.log(combinedHeatMap);
 
             if (combinedHeatMap.length === 1) state.heatMap = combinedHeatMap[0];
             else {
@@ -89,13 +100,14 @@ const gameResourcesSlice = createSlice({
             
         },
         generateGameMapGraph: (state) => {
-            if (!state.gameMap || !state.heatMap) return;
-            state.gameMapGraph = createGraphFrom2dArray(state.gameMap, state.heatMap);
+            if (!state.baseMap || !state.heatMap) return;
+            state.gameMapGraph = createGraphFrom2dArray(state.baseMap, state.heatMap);
         },
         generateHeroPath: (state) => {
-            if (!state.mapState || !state.gameMapGraph) return;
+            if (!state.mapState || !state.gameMapGraph || !state.gameMap) return;
 
-            const heroGraphPoint = `${state.mapState.heroes[0].position.x}-${state.mapState.heroes[0].position.y}`;
+            const hero = state.gameMap.heroes[0];
+            const heroGraphPoint = `${hero.position.x}-${hero.position.y}`;
             const targetGraphPoints = state.mapState.map.treasures.reduce((acc, treasure) => {
                 if (!treasure.collectedByHeroId) {
                     acc.push(`${treasure.position.x}-${treasure.position.y}`);
@@ -103,10 +115,21 @@ const gameResourcesSlice = createSlice({
                 return acc;
             }, [] as string[]);
 
-            const closestTarget = getClosestTarget(state.gameMapGraph, heroGraphPoint, targetGraphPoints);
+            const closestTarget = getPathToClosestTarget(state.gameMapGraph, heroGraphPoint, targetGraphPoints);
 
-            state.heroPath = closestTarget;
+            // state.heroPath = closestTarget.graphPath;
+            hero.heroPath = { ...closestTarget, heroId: hero.id};
         },
+        selectHeroAction: (state) => {
+            state.gameMap?.heroes.forEach(hero => {
+                if (hero.heroPath) {
+                    hero.heroAction = getHeroAction({heroPath: hero.heroPath, gameResources: state});
+                }
+            })
+        },
+        resetLevelResources: (state) => {
+            return getDefaultGameResources(state.token);
+        }
     },
 });
 
@@ -120,6 +143,8 @@ export const {
     generateGameMap,
     generateGameMapGraph,
     generateHeroPath,
+    selectHeroAction,
+    resetLevelResources
 } = gameResourcesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

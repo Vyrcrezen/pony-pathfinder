@@ -1,7 +1,7 @@
 import Bullet from "./Bullet";
 import Enemy from "./Enemy";
 import Hero from "./Hero";
-import Treause from "./Treasure";
+import Treasure from "./Treasure";
 
 export default interface MapState {
     message: string;
@@ -11,7 +11,7 @@ export default interface MapState {
         height: number;
         elapsedTickCount: number;
         status: "CREATED" | "PLAYING" | "WON" | "LOST";
-        treasures: Treause[];
+        treasures: Treasure[];
         enemies: Enemy[];
         bullets: Bullet[];
         isGameOver: boolean;

@@ -13,7 +13,6 @@ export default function GameSolverUi() {
             <div className='d-flex flex-column align-items-center'>
                 <div className='d-flex flex-column align-items-center mt-3 p-3 w-75'>
                     <GameControl />
-                    <GameState />
                     <PathingMap />
                     {/* <DebugReduxStore /> */}
                 </div>

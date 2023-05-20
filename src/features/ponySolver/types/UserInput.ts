@@ -1,4 +1,5 @@
 
 export default interface UserInput {
-    heatMapOpacity: number
+    heatMapOpacity: number;
+    isHeatValueDisplayEnabled: boolean;
 }

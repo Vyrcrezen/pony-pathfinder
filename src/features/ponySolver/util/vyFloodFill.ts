@@ -16,7 +16,7 @@ const formulaList = ['3^(-5*x)-0.6', '-2log(x+0.55)-0.2'];
 
 export default function vyFloodFill({mapWidth, mapHeight, startingCell, heatSourceCell, cutoffThreshold, heatCalcFormula = formulaList[1], heatCalcVerticalAdjustment = 0, valueMultiplicationFactor = 1}: FloodFillArguments) {
 
-    const heatMap = Array.from({length: mapHeight}, () => new Array(mapWidth).fill(0));
+    const heatMap: number[][] = Array.from({length: mapHeight}, () => new Array(mapWidth).fill(0));
     const touchedMap = Array.from({length: mapHeight}, () => new Array(mapWidth).fill(0));
     const maxDistance = Math.sqrt(Math.pow(mapWidth, 2) + Math.pow(mapHeight, 2));
     const cellQueue: Coordinate[] = [startingCell];
@@ -28,7 +28,7 @@ export default function vyFloodFill({mapWidth, mapHeight, startingCell, heatSour
         const heatDistance = divide(distance([targetCell.x, targetCell.y], [heatSourceCell.x, heatSourceCell.y]), maxDistance);
         const scope = { x: heatDistance };
         const rawHeadValue = evaluate(heatCalcFormula, scope) * valueMultiplicationFactor;
-        const heatValue = Number.parseFloat(format(rawHeadValue + heatCalcVerticalAdjustment, { notation: 'fixed', precision: 3 } ));
+        const heatValue = Math.max(Number.parseFloat(format(rawHeadValue + heatCalcVerticalAdjustment, { notation: 'fixed', precision: 3 } )), 0);
 
         heatMap[targetCell.x][targetCell.y] = heatValue;
         touchedMap[targetCell.x][targetCell.y] = 1;

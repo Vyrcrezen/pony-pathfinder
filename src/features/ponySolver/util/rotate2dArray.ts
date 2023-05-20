@@ -1,5 +1,5 @@
-export default function rotate2DArray(array: number[][]) {
-    const rotatedArray: number[][] = [];
+export default function rotate2DArray<T>(array: T[][]) {
+    const rotatedArray: T[][] = [];
 
     if (!Array.isArray(array[0])) return array;
 

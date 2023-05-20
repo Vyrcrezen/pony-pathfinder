@@ -24,6 +24,7 @@ export default interface GameState {
         isHeatMapUpdated: boolean,
         isGameMapGraphCreated: boolean,
         isPathCalculated: boolean,
+        isHeroActionSelected: boolean,
         hasHeroActed: boolean,
     }
 
@@ -31,6 +32,7 @@ export default interface GameState {
     isAdvancingLevel: boolean;
     advanceTasks: {
         isPlaythroughStateUpdated: boolean,
-        isNextLevelReady: boolean
+        isNextLevelReady: boolean,
+        isLevelReset: boolean
     }
 }

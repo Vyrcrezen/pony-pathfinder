@@ -2,11 +2,12 @@ import { AppDispatch } from "../../../../../../global/redux/store";
 import GameState from "../../../../types/GameState";
 
 import GameResources from "../../../../types/GameResources";
-import { setIsAdvancingFinished, setIsAdvancingLevel, setIsBaseMapGenerated, setIsInitMapStateFetched, setIsInitialized, setIsMapResourcesFetched, setIsNextLevelReady, setIsPlaythroughStateUpdated, setSteppingFinished } from "../../gameStateSlice";
+import { resetLevelState, setIsAdvancingFinished, setIsAdvancingLevel, setIsBaseMapGenerated, setIsInitMapStateFetched, setIsInitialized, setIsMapResourcesFetched, setIsNextLevelReady, setIsPlaythroughStateUpdated, setSteppingFinished } from "../../gameStateSlice";
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import updatePlaythroughStateThunk from "../apiThunk/updatePlaythroughStateThunk";
 import postNextLevelThunk from "../apiThunk/postNextLevelThunk";
 import postResetLevelThunk from "../apiThunk/postResetLevelThunk";
+import { resetLevelResources } from "../../gameResourcesSlice";
 
 const advanceGameLevel =
     ({ gameState, gameResources }: { gameState: GameState, gameResources: GameResources }) => async (dispatch: AppDispatch) => {
@@ -26,13 +27,12 @@ const advanceGameLevel =
             
             dispatch(setSteppingFinished(true));
             dispatch(setIsNextLevelReady(true));
-
-            dispatch(setIsAdvancingFinished(true));
-            dispatch(setIsInitialized(false));
-
-            dispatch(setIsMapResourcesFetched(false));
-            dispatch(setIsInitMapStateFetched(false));
-            dispatch(setIsBaseMapGenerated(false));
+        }
+        else if(gameState.advanceTasks.isNextLevelReady) {
+            console.log('Now resetting the level');
+            dispatch(resetLevelState());
+            dispatch(resetLevelResources());
+            dispatch(setSteppingFinished(true));
         }
 
         dispatch(setIsAdvancingLevel(false));

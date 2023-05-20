@@ -6,7 +6,8 @@ import rotate2DArray from "../../util/rotate2dArray";
 import drawToCanvasRotated from "../../util/drawToCanvasRotated";
 import drawElement from "../../util/gameMap/drawElement";
 import drawHeat from "../../util/gameMap/drawHeat";
-import drawHeroPath from "../../util/gameMap/drawHeroPath";
+import getGameRenderingMap from "../../util/gameMap/getGameRenderingMap";
+import GameRenderingCell from "../../types/GameRenderingCell";
 
 export default function GameMap() {
 
@@ -26,7 +27,13 @@ export default function GameMap() {
     }, []);
 
     useEffect(() => {
-        const alignedMap = rotate2DArray(state.resources.gameMap ?? []);
+        if (!state.resources.baseMap || !state.resources.gameMap) return;
+        const alignedMap = rotate2DArray<GameRenderingCell>( getGameRenderingMap( state.resources.baseMap, state.resources.gameMap));
+        let alignedHeatMap: number[][] | undefined = undefined;
+        if (state.resources.heatMap) alignedHeatMap = rotate2DArray<number>(state.resources.heatMap);
+
+        console.log('aligned heat map');
+        console.log(alignedHeatMap);
 
         if (canvasRef.current && Array.isArray(alignedMap) && Array.isArray(alignedMap[0])) {
             const canvas = canvasRef.current;
@@ -57,7 +64,7 @@ export default function GameMap() {
                         // drawHeroPath(ctx, rowIndex, columnIndex, x, y, cellSize, state.resources.heroPath, mapAssets);
 
                         // Overlay the heat map
-                        drawHeat(ctx, state.resources.heatMap, rowIndex, columnIndex, x, y, cellSize, state.userInput.heatMapOpacity);
+                        drawHeat(ctx, alignedHeatMap, rowIndex, columnIndex, x, y, cellSize, state.userInput);
                         
                     })
                 });
@@ -68,7 +75,7 @@ export default function GameMap() {
             }
         }
 
-    }, [state.resources.heroPath, state.resources.gameMap, state.resources.heatMap, state.userInput.heatMapOpacity]);
+    }, [state.resources.gameMap, state.resources.heatMap, state.userInput]);
 
     return (
         <div className="m-3 w-100" >

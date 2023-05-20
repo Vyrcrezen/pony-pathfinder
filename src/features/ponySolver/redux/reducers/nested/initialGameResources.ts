@@ -1,15 +1,6 @@
 import GameResources from "../../../types/GameResources";
+import getDefaultGameResources from "../../../initializers/getDefaultGameResources";
 
-const initialGameResources: GameResources = {
-    token: "",
-    mapState: undefined,
-    mapResources: undefined,
-    approveHeroTurnResponse: undefined,
-    baseMap: [],
-    heatMap: [],
-    gameMap: [],
-    gameMapGraph: {},
-    heroPath: undefined
-}
+const initialGameResources: GameResources = getDefaultGameResources();
 
 export default initialGameResources;

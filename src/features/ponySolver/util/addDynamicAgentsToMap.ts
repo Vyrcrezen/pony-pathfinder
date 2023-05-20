@@ -1,40 +1,34 @@
+import getDefaultGameMap from "../initializers/getDefaultGameMap";
+import GameMap from "../types/GameMap";
 import MapEntities from "../types/MapEntities";
 import MapState from "../types/MapState";
+import Treasure from "../types/Treasure";
 
 export default function addDynamicAgentsToMap(
-    obstacleMap: number[][],
     mapState: MapState
-) {
-    const updatedMap = JSON.parse(JSON.stringify(obstacleMap));
+): GameMap {
+    // const updatedMap = JSON.parse(JSON.stringify(obstacleMap)) as number[][];
+
+    const updatedMap: GameMap = getDefaultGameMap();
 
     // Adding Treasures
     if (mapState && mapState.map.treasures) {
-        mapState.map.treasures.forEach((treasure) => {
-            updatedMap[treasure.position.x][treasure.position.y] =
-            treasure.collectedByHeroId ? MapEntities.COLLECTED_TREASURE : MapEntities.TREASURE;
-        });
+        updatedMap.treasures = mapState.map.treasures;
     }
 
     // Adding Enemies
     if (mapState && mapState.map.enemies) {
-        mapState.map.enemies.forEach((enemy) => {
-            updatedMap[enemy.position.x][enemy.position.y] = MapEntities.ENEMY;
-        });
+        updatedMap.enemies = mapState.map.enemies;
     }
 
     // Adding Bullets
     if (mapState && mapState.map.bullets) {
-        mapState.map.bullets.forEach((bullet) => {
-            updatedMap[bullet.position.x][bullet.position.y] =
-                MapEntities.BULLET;
-        });
+        updatedMap.bullets = mapState.map.bullets;
     }
 
     // Adding Hero
     if (mapState && mapState.heroes) {
-        mapState.heroes.forEach((hero) => {
-            updatedMap[hero.position.x][hero.position.y] = MapEntities.HERO;
-        });
+        updatedMap.heroes = mapState.heroes.map(hero => ({ ...hero, heroAction: 'NOTHING' }));
     }
 
     return updatedMap;

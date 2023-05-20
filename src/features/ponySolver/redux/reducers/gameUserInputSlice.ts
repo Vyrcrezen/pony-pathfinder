@@ -10,11 +10,15 @@ const gameUserInputSlice = createSlice({
             if (action.payload < 0 || 100 < action.payload ) return;
             state.heatMapOpacity = action.payload;
         },
+        setIsHeatValueDisplayEnabled: (state, action: PayloadAction<boolean>) => {
+            state.isHeatValueDisplayEnabled = action.payload;
+        }
     },
 });
 
 export const {
-    setHeatMapOpacity
+    setHeatMapOpacity,
+    setIsHeatValueDisplayEnabled
 } = gameUserInputSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

@@ -2,7 +2,7 @@ import importMapAssets from "../../imports/importMapAssets";
 import drawToCanvasRotated from "../drawToCanvasRotated";
 import getMovementDirection from "../getMovementDirection";
 
-export default function drawHeroPath(ctx: CanvasRenderingContext2D, rowIndex: number, columnIndex: number, x: number, y: number, cellSize: number, heroPath: string[] | undefined, mapAssets?: Awaited<ReturnType<typeof importMapAssets>>) {
+function drawHeroPath(ctx: CanvasRenderingContext2D, rowIndex: number, columnIndex: number, x: number, y: number, cellSize: number, heroPath: string[] | undefined, mapAssets?: Awaited<ReturnType<typeof importMapAssets>>) {
 
     console.log('Entered the heroPath function');
     console.log(heroPath);

@@ -12,33 +12,33 @@ export default function DebugGameMap() {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (canvasRef.current && Array.isArray(alignedMap) && Array.isArray(alignedMap[0])) {
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
+    //     if (canvasRef.current && Array.isArray(alignedMap) && Array.isArray(alignedMap[0])) {
+    //         const canvas = canvasRef.current;
+    //         const ctx = canvas.getContext('2d');
 
-            if (ctx) {
-                const cellSize = 20;
-                const numRows = alignedMap.length;
-                const numCols = alignedMap[0].length;
+    //         if (ctx) {
+    //             const cellSize = 20;
+    //             const numRows = alignedMap.length;
+    //             const numCols = alignedMap[0].length;
 
-                canvas.width = cellSize * numCols;
-                canvas.height = cellSize * numRows;
+    //             canvas.width = cellSize * numCols;
+    //             canvas.height = cellSize * numRows;
 
-                alignedMap.forEach((row, rowIndex) => {
-                    row.forEach((cell, columnIndex) => {
-                        const x = columnIndex * cellSize;
-                        const y = rowIndex * cellSize;
+    //             alignedMap.forEach((row, rowIndex) => {
+    //                 row.forEach((cell, columnIndex) => {
+    //                     const x = columnIndex * cellSize;
+    //                     const y = rowIndex * cellSize;
 
-                        ctx.fillStyle = cell === MapEntities.OBSTACLE ? 'black' : cell === MapEntities.HERO ? 'green' : cell === MapEntities.ENEMY ? 'red' : cell === MapEntities.BULLET ? 'orange' : cell === MapEntities.TREASURE ? 'blue' : 'white';
-                        ctx.fillRect(x, y, cellSize, cellSize);
-                    })
-                });
-            }
-        }
+    //                     ctx.fillStyle = cell === MapEntities.OBSTACLE ? 'black' : cell === MapEntities.HERO ? 'green' : cell === MapEntities.ENEMY ? 'red' : cell === MapEntities.BULLET ? 'orange' : cell === MapEntities.TREASURE ? 'blue' : 'white';
+    //                     ctx.fillRect(x, y, cellSize, cellSize);
+    //                 })
+    //             });
+    //         }
+    //     }
 
-    }, [state.resources.gameMap]);
+    // }, [state.resources.gameMap]);
 
     return <canvas ref={canvasRef} />;
 }

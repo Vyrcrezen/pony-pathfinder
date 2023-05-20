@@ -7,7 +7,7 @@ function getSrcToImage(src: string) {
 
 export default async function importMapAssets() {
 
-    type assetPropNames = 'ponyChar' | 'hoofPrints' | 'ghost' | 'fruit' | 'fruitCore' | 'fireball' | 'arrowSlim' | 'carOne' | 'carTwo' | 'carThree' | 'carFour';
+    type assetPropNames = 'ponyChar' | 'hoofPrints' | 'shield' | 'sword' | 'ghost' | 'ghostLamp' | 'fruit' | 'fruitCore' | 'fireball' | 'arrowSlim' | 'carOne' | 'carTwo' | 'carThree' | 'carFour';
 
     const imageImports: Record<assetPropNames, { name: string, image: HTMLImageElement}> = {} as Record<assetPropNames, { name: string, image: HTMLImageElement}>;
     const promiseArray: Promise<any>[] = [];
@@ -15,6 +15,9 @@ export default async function importMapAssets() {
     promiseArray.push( import('./../../../global/media/images/hero-pony.png').then(data => imageImports.ponyChar = { name: 'pony-char', image: getSrcToImage(data.default) }) );
     promiseArray.push( import('./../../../global/media/images/hoofprints.png').then(data => imageImports.hoofPrints = { name: 'hoofprints', image: getSrcToImage(data.default) }) );
     promiseArray.push( import('./../../../global/media/images/ghost.png').then(data => imageImports.ghost = { name: 'ghost', image: getSrcToImage(data.default) }) );
+    promiseArray.push( import('./../../../global/media/images/shield.png').then(data => imageImports.shield = { name: 'shield', image: getSrcToImage(data.default) }) );
+    promiseArray.push( import('./../../../global/media/images/sword.png').then(data => imageImports.sword = { name: 'sword', image: getSrcToImage(data.default) }) );
+    promiseArray.push( import('./../../../global/media/images/ghost-lamp.png').then(data => imageImports.ghostLamp = { name: 'ghostLamp', image: getSrcToImage(data.default) }) );
     promiseArray.push( import('./../../../global/media/images/fruit.png').then(data => imageImports.fruit = { name: 'fruit', image: getSrcToImage(data.default) }) );
     promiseArray.push( import('./../../../global/media/images/fruit-core.png').then(data => imageImports.fruitCore = { name: 'fruit-core', image: getSrcToImage(data.default) }) );
     promiseArray.push( import('./../../../global/media/images/fireball.png').then(data => imageImports.fireball = { name: 'fireball', image: getSrcToImage(data.default) }) );

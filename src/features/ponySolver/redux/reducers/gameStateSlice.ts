@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import ReduxStore from "../../../../global/redux/types/ReduxStore";
 import initialPonyStoreState from "../initialPonyStoreState";
+import getDefaultGameState from "../../initializers/getDefaultGameState";
 
 const gameStateSlice = createSlice({
     name: "ponySolver/state",
@@ -38,6 +39,9 @@ const gameStateSlice = createSlice({
         setSteppingFinished: (state, action: PayloadAction<boolean>) => {
             state.isStepFinished = action.payload;
         },
+        resetLevelState: (state) => {
+            return getDefaultGameState({ taskLog: state.taskLog, isPlaying: state.isPlaying});
+        },
         // initTasks
         setIsMapResourcesFetched: (state, action: PayloadAction<boolean>) => {
             state.initTasks.isMapResourcesFetched = action.payload;
@@ -67,6 +71,9 @@ const gameStateSlice = createSlice({
         setIsPathCalculated: (state, action: PayloadAction<boolean>) => {
             state.runtimeTasks.isPathCalculated = action.payload;
         },
+        setIsHeroActionSelected: (state, action: PayloadAction<boolean>) => {
+            state.runtimeTasks.isHeroActionSelected = action.payload;
+        },
         setHasHeroActed: (state, action: PayloadAction<boolean>) => {
             state.runtimeTasks.hasHeroActed = action.payload;
         },
@@ -77,6 +84,9 @@ const gameStateSlice = createSlice({
         setIsNextLevelReady: (state, action: PayloadAction<boolean>) => {
             state.advanceTasks.isNextLevelReady = action.payload;
         },
+        setIsLevelReset: (state, action: PayloadAction<boolean>) => {
+            state.advanceTasks.isLevelReset = action.payload;
+        }
     },
 });
 
@@ -91,6 +101,7 @@ export const {
     toggleIsPlaying,
     setIsStepping,
     setSteppingFinished,
+    resetLevelState,
     setIsMapResourcesFetched,
     setIsInitMapStateFetched,
     setIsBaseMapGenerated,
@@ -100,9 +111,11 @@ export const {
     setIsHeatMapUpdated,
     setIsGameMapGraphCreated,
     setIsPathCalculated,
+    setIsHeroActionSelected,
     setHasHeroActed,
     setIsPlaythroughStateUpdated,
     setIsNextLevelReady,
+    setIsLevelReset,
 } = gameStateSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

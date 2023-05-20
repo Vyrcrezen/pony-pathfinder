@@ -11,7 +11,7 @@ const GameSolver: React.FC = () => {
 
     useEffect(() => {
         if (state.state.isPlaying || (state.state.isStepping && !state.state.isStepFinished)) {
-            if(state.state.isAdvancingFinished && !state.state.isInitialized && !state.state.isBeingInitialized) {
+            if(!state.state.isInitialized && !state.state.isBeingInitialized) {
                 console.log('dispatching initializeGameStateThunk');
                 dispatch(initializeGameStateThunk({ gameState: state.state, gameResources: state.resources }));
             }

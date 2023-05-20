@@ -1,29 +1,53 @@
 import importMapAssets from "../../imports/importMapAssets";
+import GameRenderingCell from "../../types/GameRenderingCell";
 import MapEntities from "../../types/MapEntities";
+import drawToCanvasRotated from "../drawToCanvasRotated";
 
-export default function drawElement(ctx: CanvasRenderingContext2D, columnIndex: number, rowIndex: number, posX: number, posY: number, cellSize: number, cellValue: number, mapAssets?: Awaited<ReturnType<typeof importMapAssets>>) {
+export default function drawElement(ctx: CanvasRenderingContext2D, columnIndex: number, rowIndex: number, posX: number, posY: number, cellSize: number, cellValue: GameRenderingCell, mapAssets?: Awaited<ReturnType<typeof importMapAssets>>) {
     
     if (mapAssets) {
 
         ctx.fillStyle = 'rgb(141, 235, 207)';
         ctx.fillRect(posX, posY, cellSize, cellSize);
 
-        if (cellValue === MapEntities.HERO) ctx.drawImage(mapAssets.ponyChar.image, posX, posY, cellSize, cellSize);
-        if (cellValue === MapEntities.TREASURE) ctx.drawImage(mapAssets.fruit.image, posX, posY, cellSize, cellSize);
-        if (cellValue === MapEntities.COLLECTED_TREASURE) ctx.drawImage(mapAssets.fruitCore.image, posX, posY, cellSize, cellSize);
-        if (cellValue === MapEntities.ENEMY) ctx.drawImage(mapAssets.ghost.image, posX, posY, cellSize, cellSize);
-        if (cellValue === MapEntities.BULLET) ctx.drawImage(mapAssets.fireball.image, posX, posY, cellSize, cellSize);
-        if (cellValue === MapEntities.OBSTACLE) {
-            // const obstacleId = Math.floor(Math.random() * 4 + 1);
-            const obstacleId = ((columnIndex + rowIndex) % 4) + 1;
+        cellValue.forEach(value => {
+            if (value.type === 'obstacle') {
+                const obstacleId = ((columnIndex + rowIndex) % 4) + 1;
+                ctx.drawImage( obstacleId === 1 ? mapAssets.carOne.image : obstacleId === 2 ? mapAssets.carTwo.image : obstacleId === 3 ? mapAssets.carThree.image : mapAssets.carFour.image, posX, posY, cellSize, cellSize);
+            }
+            else if (value.type === 'heroPath') {
+                const degress = value.data.direction === 'MOVE_UP' ? 0 : value.data.direction === 'MOVE_RIGHT' ? 90 : value.data.direction === 'MOVE_DOWN' ? 180 : -90;
+                drawToCanvasRotated(ctx, mapAssets.hoofPrints.image, cellSize, { x: posX, y: posY }, degress);
+            }
+            else if (value.type === 'enemy') {
+                if (value.data.health > 0) ctx.drawImage(mapAssets.ghost.image, posX, posY, cellSize, cellSize);
+                else ctx.drawImage(mapAssets.ghostLamp.image, posX, posY, cellSize, cellSize);
+                
+            }
+            else if (value.type === 'bullet') {
+                ctx.drawImage(mapAssets.fireball.image, posX, posY, cellSize, cellSize);
 
-            ctx.drawImage( obstacleId === 1 ? mapAssets.carOne.image : obstacleId === 2 ? mapAssets.carTwo.image : obstacleId === 3 ? mapAssets.carThree.image : mapAssets.carFour.image, posX, posY, cellSize, cellSize);
+                if (value.data.direction === 'LEFT') drawToCanvasRotated(ctx, mapAssets.arrowSlim.image, cellSize, { x: posX, y: posY }, 0);
+                if (value.data.direction === 'UP') drawToCanvasRotated(ctx, mapAssets.arrowSlim.image, cellSize, { x: posX, y: posY }, 90);
+                if (value.data.direction === 'RIGHT') drawToCanvasRotated(ctx, mapAssets.arrowSlim.image, cellSize, { x: posX, y: posY }, 180);
+                if (value.data.direction === 'DOWN') drawToCanvasRotated(ctx, mapAssets.arrowSlim.image, cellSize, { x: posX, y: posY }, -90);
+            }
+            else if (value.type === 'treasure') {
+                if (value.data.collectedByHeroId) ctx.drawImage(mapAssets.fruitCore.image, posX, posY, cellSize, cellSize);
+                else ctx.drawImage(mapAssets.fruit.image, posX, posY, cellSize, cellSize);
+            }
+            else if (value.type === 'hero') {
+                ctx.drawImage(mapAssets.ponyChar.image, posX, posY, cellSize, cellSize);
 
-            // drawToCanvasRotated(ctx, mapAssets.carFour.image, cellSize, { x, y }, Math.floor(Math.random() * 180 + 1));
-        }
+                if (value.data.heroAction === 'USE_SHIELD') ctx.drawImage(mapAssets.shield.image, posX, posY, cellSize, cellSize);
+            }
+            else if (value.type === 'heroAttack') {
+                ctx.drawImage(mapAssets.sword.image, posX, posY, cellSize, cellSize);
+            }
+        });
     }
-    else {
-        ctx.fillStyle = cellValue === MapEntities.OBSTACLE ? 'black' : cellValue === MapEntities.HERO ? 'green' : cellValue === MapEntities.ENEMY ? 'red' : cellValue === MapEntities.BULLET ? 'orange' : cellValue === MapEntities.TREASURE ? 'blue' : cellValue === MapEntities.COLLECTED_TREASURE ? 'gray' : 'white';
-        ctx.fillRect(posX, posY, cellSize, cellSize);
-    }
+    // else {
+    //     ctx.fillStyle = cellValue === MapEntities.OBSTACLE ? 'black' : cellValue === MapEntities.HERO ? 'green' : cellValue === MapEntities.ENEMY ? 'red' : cellValue === MapEntities.BULLET ? 'orange' : cellValue === MapEntities.TREASURE ? 'blue' : cellValue === MapEntities.COLLECTED_TREASURE ? 'gray' : 'white';
+    //     ctx.fillRect(posX, posY, cellSize, cellSize);
+    // }
 }

@@ -3,6 +3,7 @@ import MapResource from "./MapResource";
 import MapState from "./MapState";
 import ApproveHeroTurnResponse from "./ApproveHeroTurnResponse";
 import PlaythroughState from "./PlaythroughState";
+import GameMap from "./GameMap";
 
 export default interface GameResources {
     token: string,
@@ -12,11 +13,11 @@ export default interface GameResources {
     playthroughState?: PlaythroughState,
     baseMap?: number[][],
     heatMap?: number[][],
-    gameMap?: number[][],
+    gameMap: GameMap,
     gameMapGraph?: {
         [prop: string]: {
             [prop: string]: number;
         }
     },
-    heroPath?: string[],
+    // heroPath?: string[],
 }

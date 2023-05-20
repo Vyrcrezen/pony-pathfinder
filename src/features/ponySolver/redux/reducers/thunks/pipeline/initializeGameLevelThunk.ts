@@ -33,14 +33,14 @@ const initializeGameStateThunk =
             dispatch(setIsInitialized(true));
 
             // Reset the next game logic states to default, to be sure
-            dispatch(setIsLevelOver(false));
-            dispatch(setIsMapStateFetched(false));
-            dispatch(setIsMapStatusUpdated(false));
-            dispatch(setIsGameMapUpdated(false));
-            dispatch(setIsHeatMapUpdated(false));
-            dispatch(setIsGameMapGraphCreated(false));
-            dispatch(setIsPathCalculated(false));
-            dispatch(setHasHeroActed(false));
+            // dispatch(setIsLevelOver(false));
+            // dispatch(setIsMapStateFetched(false));
+            // dispatch(setIsMapStatusUpdated(false));
+            // dispatch(setIsGameMapUpdated(false));
+            // dispatch(setIsHeatMapUpdated(false));
+            // dispatch(setIsGameMapGraphCreated(false));
+            // dispatch(setIsPathCalculated(false));
+            // dispatch(setHasHeroActed(false));
         }
 
         dispatch(setIsBeingInitialized(false));

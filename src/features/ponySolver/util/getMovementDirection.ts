@@ -1,10 +1,11 @@
 import Coordinate from "../types/Coordinate";
 import HeroAction from "../types/HeroAction";
+import HeroMovement from "../types/HeroMovement";
 
-function getMovementDirection(start: Coordinate, end: Coordinate): HeroAction;
-function getMovementDirection(start: number[], end: number[]): HeroAction;
- function getMovementDirection(start: Coordinate | number[], end: Coordinate | number[]): HeroAction {
-    let intendedAction: HeroAction = "USE_SHIELD";
+function getMovementDirection(start: Coordinate, end: Coordinate): HeroMovement;
+function getMovementDirection(start: number[], end: number[]): HeroMovement;
+ function getMovementDirection(start: Coordinate | number[], end: Coordinate | number[]): HeroMovement {
+    let intendedAction: HeroMovement = "NOTHING";
 
     if (!Array.isArray(start) && !Array.isArray(end) ) {
         if (start.x > end.x) intendedAction = "MOVE_LEFT";
