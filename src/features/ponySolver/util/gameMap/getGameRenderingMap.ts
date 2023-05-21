@@ -7,9 +7,6 @@ import getMovementDirection from "../getMovementDirection";
 export default function getGameRenderingMap(baseMap: number[][], gameMap: GameMap) {
     const gameRenderingMap: GameRenderingMap = Array.from({length: baseMap.length}, () => new Array(baseMap[0].length));
     
-    console.log('gameRenderingMap');
-    console.log(JSON.parse(JSON.stringify(gameRenderingMap)));
-
     // Start by adding the obstacles
     baseMap.forEach((obstacleRow, rowIndex) => {
         obstacleRow.forEach((cell, columnIndex) => {
@@ -60,12 +57,6 @@ export default function getGameRenderingMap(baseMap: number[][], gameMap: GameMa
         if (hero.heroAction === 'KICK_LEFT') gameRenderingMap[hero.position.x - 2][hero.position.y].push({ type: "heroAttack", data: { heroId: hero.id } });
         if (hero.heroAction === 'KICK_UP') gameRenderingMap[hero.position.x][hero.position.y + 2].push({ type: "heroAttack", data: { heroId: hero.id } });
     });
-
-    
-
-
-    console.log('game rendering map');
-    console.log(JSON.parse(JSON.stringify(gameRenderingMap)));
 
     return gameRenderingMap;
 }

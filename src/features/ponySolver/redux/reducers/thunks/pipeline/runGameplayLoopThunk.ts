@@ -6,9 +6,10 @@ import GameState from "../../../../types/GameState";
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import performHeroActionThunk from "../apiThunk/performHeroActionThunk";
 import GameResources from "../../../../types/GameResources";
+import UserInput from "../../../../types/UserInput";
 
 const runGameplayLoopThunk =
-    ({ gameState, gameResources }: { gameState: GameState, gameResources: GameResources }) => async (dispatch: AppDispatch) => {
+    ({ gameState, gameResources, userInput }: { gameState: GameState, gameResources: GameResources, userInput: UserInput }) => async (dispatch: AppDispatch) => {
 
         const { token } = gameResources;
 
@@ -40,7 +41,8 @@ const runGameplayLoopThunk =
             dispatch(setIsGameMapUpdated(true));
         }
         if (gameState.runtimeTasks.isGameMapUpdated && !gameState.runtimeTasks.isHeatMapUpdated) {
-            gameStepActionWrapper(dispatch, gameState, 'Generating HeatMap', generateHeatMap);
+            dispatch(pushTaskDescription('Generating HeatMap'));
+            dispatch(generateHeatMap({ bulletHeatSettings: userInput.bulletHeatSettings, ghostHeatSettings: userInput.ghostHeatSettings }));
             dispatch(setSteppingFinished(true));
             dispatch(setIsHeatMapUpdated(true));
         }

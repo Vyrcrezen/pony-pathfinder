@@ -12,8 +12,11 @@ export default function drawHeat(ctx: CanvasRenderingContext2D, heatMap: number[
 
         if (userInput.isHeatValueDisplayEnabled) {
             ctx.fillStyle = `hsl(${hue}, 100%, 10%)`;
+            ctx.strokeStyle = `hsl(${hue}, 100%, 90%)`;
+            ctx.lineWidth = 1;
             ctx.font = '12px Arial';
-            ctx.fillText(`${mapHeatToGraphValue(heatValue)}`, posX, posY, cellSize);
+            ctx.strokeText(`${mapHeatToGraphValue(heatValue)}`, posX+(cellSize/2), posY+(cellSize/2), cellSize);
+            ctx.fillText(`${mapHeatToGraphValue(heatValue)}`, posX+(cellSize/2), posY+(cellSize/2), cellSize);
         }
     }
 }

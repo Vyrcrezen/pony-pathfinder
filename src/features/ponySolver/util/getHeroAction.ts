@@ -9,11 +9,6 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
     // const pathCoordinates = heroPath.graphPath.map(graphVertex => ({ x: +graphVertex.split('-')[0], y: +graphVertex.split('-')[1] }));
     const pathCoordinates = heroPath.coordinatePath;
 
-    console.log('Now selecting hero action');
-    console.log('intended hero path:');
-    console.log(heroPath);
-    console.log(gameResources);
-
     // Determine the intended movement
     let intendedAction: HeroAction = getMovementDirection(pathCoordinates[0], pathCoordinates[1]);
 

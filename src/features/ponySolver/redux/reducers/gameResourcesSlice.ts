@@ -17,6 +17,8 @@ import getDefaultGameMap from "../../initializers/getDefaultGameMap";
 import getDefaultGameState from "../../initializers/getDefaultGameState";
 import getDefaultGameResources from "../../initializers/getDefaultGameResources";
 import getHeroAction from "../../util/getHeroAction";
+import GhostHeatSettings from "../../types/GhostHeatSettings";
+import BulletHeatSettings from "../../types/BulletHeatSettings";
 
 const gameResourcesSlice = createSlice({
     name: "ponySolver/resources",
@@ -50,12 +52,22 @@ const gameResourcesSlice = createSlice({
             if (!state.mapState || !state.baseMap) return;
             state.gameMap = addDynamicAgentsToMap(_.cloneDeep(state.mapState));
         },
-        generateHeatMap: (state) => {
+        generateHeatMap: (state, action: PayloadAction<{ ghostHeatSettings?: GhostHeatSettings, bulletHeatSettings?: BulletHeatSettings }>) => {
             if (!state.mapState ) return;
 
+            // Generate a 2d number array with 0 everywhere
             const blankHeatMap: number[][] = Array.from({length: state.mapState!.map.height}, () => new Array(state.mapState!.map.width).fill(0));
 
+            // Resolve ghost heat settings
+            const ghostHeatSettings = action?.payload?.ghostHeatSettings;
+
+            // Create an array of heatmaps for each enemy
             const enemyHeatMaps: number[][][] = state.mapState.map.enemies.reduce((acc, enemy) => {
+
+                const multiplicationFactor =  enemy.bulletDamage * (ghostHeatSettings?.bulletDamageWeight ?? 1)
+                                              + enemy.onTouchDamage * (ghostHeatSettings?.touchDamageWeight ?? 1)
+                                              + enemy.moveProbability * (ghostHeatSettings?.moveProbabilityWeight ?? 0)
+                                              + enemy.shootProbability * (ghostHeatSettings?.shootProbabilityWeight ?? 0)
 
                 if ( enemy.health > 0 ) {
                     acc.push(vyFloodFill({
@@ -63,36 +75,42 @@ const gameResourcesSlice = createSlice({
                         mapHeight: state.mapState!.map.height,
                         startingCell: { x: enemy.position.x, y: enemy.position.y },
                         heatSourceCell: { x: enemy.position.x, y: enemy.position.y },
-                        cutoffThreshold: 0.1,
-                        valueMultiplicationFactor: enemy.onTouchDamage
+                        heatCalcFormula: ghostHeatSettings?.heatFormula,
+                        heatCalcVerticalAdjustment: ghostHeatSettings?.formulaVerticalAdjustement,
+                        cutoffThreshold: ghostHeatSettings?.heatCutoffThreshold ?? 0.1,
+                        valueMultiplicationFactor: multiplicationFactor
                     }));
                 }
 
                 return acc;
             }, [] as number[][][]);
 
-            const bulletHeatMaps = state.mapState.map.bullets.map(bullet => vyFloodFill({
-                mapWidth: state.mapState!.map.width,
-                mapHeight: state.mapState!.map.height,
-                startingCell: { x: bullet.position.x, y: bullet.position.y },
-                heatSourceCell: { x: bullet.position.x, y: bullet.position.y },
-                cutoffThreshold: 0.1,
-                valueMultiplicationFactor: bullet.damage
-            }));
+            // Resolve ghost heat settings
+            const bulletHeatSettings = action?.payload?.bulletHeatSettings;
 
+            // Create an array of heat maps for each bullet
+            const bulletHeatMaps = state.mapState.map.bullets.map(bullet => {
+
+                const multiplicationFactor = bullet.damage * (bulletHeatSettings?.bulletDamageWeight ?? 1);
+
+                return vyFloodFill({
+                    mapWidth: state.mapState!.map.width,
+                    mapHeight: state.mapState!.map.height,
+                    startingCell: { x: bullet.position.x, y: bullet.position.y },
+                    heatSourceCell: { x: bullet.position.x, y: bullet.position.y },
+                    heatCalcFormula: bulletHeatSettings?.heatFormula,
+                    heatCalcVerticalAdjustment: bulletHeatSettings?.heatCutoffThreshold,
+                    cutoffThreshold: bulletHeatSettings?.heatCutoffThreshold ?? 0.1,
+                    valueMultiplicationFactor: multiplicationFactor
+            });
+        });
+
+            // Combine all heat map arrays into a single array of heat maps
             const combinedHeatMap = [blankHeatMap, ...enemyHeatMaps, ...bulletHeatMaps];
 
-            // console.log("combinedHeatMap");
-            // console.log(combinedHeatMap);
-
+            // If we only have the blank heat map, return that (if there are neither enemies nor bullets)
             if (combinedHeatMap.length === 1) state.heatMap = combinedHeatMap[0];
             else {
-                // const summedHeatMap = _.zipWith(...combinedHeatMap, (a, b) => {
-                //     console.log('a, b');
-                //     console.log(a);
-                //     console.log(b);
-                //     return a.map((val, i) => val + b[i])
-                // });
                 const summedHeatMap = vyCombineHeatMaps(...combinedHeatMap);
                 state.heatMap = summedHeatMap;
             }
@@ -117,7 +135,6 @@ const gameResourcesSlice = createSlice({
 
             const closestTarget = getPathToClosestTarget(state.gameMapGraph, heroGraphPoint, targetGraphPoints);
 
-            // state.heroPath = closestTarget.graphPath;
             hero.heroPath = { ...closestTarget, heroId: hero.id};
         },
         selectHeroAction: (state) => {
@@ -127,8 +144,8 @@ const gameResourcesSlice = createSlice({
                 }
             })
         },
-        resetLevelResources: (state) => {
-            return getDefaultGameResources(state.token);
+        resetLevelResources: (state, action: PayloadAction<{ keepPlaythroughState?: boolean }>) => {
+            return getDefaultGameResources({ token: state.token, playthroughState: action.payload.keepPlaythroughState ? state.playthroughState : undefined});
         }
     },
 });
@@ -137,6 +154,7 @@ export const {
     addGameToken,
     updateMapResource,
     updateMapState,
+    updatePlaythroughState,
     updateApproveHeroTurnResponse,
     generateBaseMap,
     generateHeatMap,

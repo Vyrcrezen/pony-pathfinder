@@ -29,9 +29,8 @@ const advanceGameLevel =
             dispatch(setIsNextLevelReady(true));
         }
         else if(gameState.advanceTasks.isNextLevelReady) {
-            console.log('Now resetting the level');
-            dispatch(resetLevelState());
-            dispatch(resetLevelResources());
+            dispatch(resetLevelState({ taskLog: gameState.taskLog, isPlaying: gameState.isPlaying }));
+            dispatch(resetLevelResources({ keepPlaythroughState: true }));
             dispatch(setSteppingFinished(true));
         }
 

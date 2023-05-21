@@ -1,13 +1,11 @@
 import { TextField, Button } from '@mui/material';
 import React, { useEffect } from 'react';
-import { addGameToken } from '../../redux/reducers/gameResourcesSlice';
+import { addGameToken, generateHeatMap, generateHeroPath } from '../../redux/reducers/gameResourcesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../global/redux/hooks';
-import getNextAction from '../../logic/GameSolver';
 import GameSolver from '../../logic/GameSolver';
-import { setIsInitialized, setIsStepping, toggleIsPlaying } from '../../redux/reducers/gameStateSlice';
-import vyFloodFill from '../../util/vyFloodFill';
+import PlayerCard from '../presentational/cardElements/PlayerCard';
+import ControlCard from '../presentational/cardElements/ControlCard';
 import GameState from './GameState';
-import MapControls from './MapControls';
 
 export default function GameControl() {
 
@@ -22,46 +20,18 @@ export default function GameControl() {
     // vyFloodFill({ mapWidth: 10, mapHeight: 10, startingCell: { x: 5, y: 5 }, heatSourceCell: { x: 5, y: 5 }, cutoffThreshold: 0.1 });
 
     return (
-        <div className='container rounded vy-secondary'>
-            <div className='row'>
-                <div className='col'>
-                    <div className='p-2'>
-                        <TextField
-                            fullWidth
-                            label='Token'
-                            variant='outlined'
-                            multiline
-                            minRows={2}
-                            onBlur={(event) => dispatch(addGameToken(event.target.value))}
-                        />
-                        <div className='d-flex flex-row justify-content-evenly mt-3'>
-                            <Button
-                                onClick={() => dispatch(toggleIsPlaying())}
-                                variant='contained'
-                                color='primary'>
-                                {state.state.isPlaying ? 'Pause' : 'Play'}
-                            </Button>
-                            <Button
-                                onClick={() => dispatch(setIsStepping(true))}
-                                variant='contained'
-                                color='primary'
-                                disabled={state.state.isPlaying ? true : undefined}
-                            >
-                                {'Step'}
-                            </Button>
-                            <Button
-                                variant='contained'>
-                                Reset
-                            </Button>
-                        </div>
-                    </div>
+        <div className='container'>
+            <div className='row gy-2'>
+                <div className='col-lg d-flex'>
+                    <ControlCard />
                 </div>
-                <div className='col'>
+                <div className="col-lg d-flex">
                     <GameState />
                 </div>
+                <div className='col-lg d-flex'>
+                    <PlayerCard />
+                </div>
             </div>
-
-
             <GameSolver />
         </div>
     );

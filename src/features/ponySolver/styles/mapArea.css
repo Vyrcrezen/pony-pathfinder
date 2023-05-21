@@ -1,0 +1,31 @@
+.vy-profile-img {
+    width: 7rem;
+    max-width: 100%;
+    height: auto;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+.vy-img-fit {
+    object-fit: contain;
+}
+
+/* Media query for larger screens */
+/* @media (min-width: 992px) {
+    .map-element {
+        min-width: 400px;
+        min-width: 400px;
+    }
+
+    .map-side-element {
+        min-width: 200px;
+    }
+} */

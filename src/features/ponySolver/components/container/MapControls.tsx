@@ -9,7 +9,7 @@ export default function MapControls() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="container h-100 d-flex flex-row align-items-center justify-content-evenly">
+        <div className="container d-flex flex-row align-items-center justify-content-evenly">
             <FormControlLabel control={
                 <Slider
                     className="ms-2"

@@ -39,8 +39,8 @@ const gameStateSlice = createSlice({
         setSteppingFinished: (state, action: PayloadAction<boolean>) => {
             state.isStepFinished = action.payload;
         },
-        resetLevelState: (state) => {
-            return getDefaultGameState({ taskLog: state.taskLog, isPlaying: state.isPlaying});
+        resetLevelState: (state, action: PayloadAction<{taskLog?: string[], isPlaying?: boolean}>) => {
+            return getDefaultGameState({ taskLog: action?.payload.taskLog, isPlaying: action?.payload.isPlaying});
         },
         // initTasks
         setIsMapResourcesFetched: (state, action: PayloadAction<boolean>) => {

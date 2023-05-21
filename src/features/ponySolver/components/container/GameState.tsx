@@ -6,7 +6,7 @@ export default function GameState() {
     const state = useAppSelector(state => state.ponySolver);
 
     return (
-        <div className="d-flex flex-column align-items-start rounded vy-secondary mt-3 p-1">
+        <div className="d-flex flex-column align-items-start rounded vy-secondary p-1 flex-grow-1">
             <ul className="list-unstyled m-0 p-0">
                 <li>{state.state.taskLog[0] ?? ''}</li>
                 <li>{state.state.taskLog[1] ?? ''}</li>

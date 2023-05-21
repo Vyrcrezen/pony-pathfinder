@@ -8,12 +8,6 @@ import HeroAction from "../../../../types/HeroAction";
 
 const performHeroActionThunk = ({gameResources}: {gameResources: GameResources}) => async (dispatch: Dispatch<AnyAction>) => {
 
-    // const heroId = gameResources.gameMap?.heroes[0].id;
-    // const heroPath = gameResources.gameMap?.heroes[0].heroPath;
-    // if (!heroId || !heroPath) return;
-
-    // const heroAction = selectHeroAction({heroPath, gameResources})
-
     const hero = gameResources.gameMap.heroes[0];
     const response = await postApproveHeroTurn(gameResources.token, hero.heroAction, hero.id);
 

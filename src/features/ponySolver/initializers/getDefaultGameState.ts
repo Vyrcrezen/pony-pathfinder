@@ -1,7 +1,7 @@
 import _ from "lodash";
 import GameState from "../types/GameState";
 
-export default function getDefaultGameState(persistedStates?: {taskLog?: string[], isPlaying: boolean} ) {
+export default function getDefaultGameState(persistedStates?: {taskLog?: string[], isPlaying?: boolean} ) {
 
     const {taskLog, isPlaying} = persistedStates ?? {};
 

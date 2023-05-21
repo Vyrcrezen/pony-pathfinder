@@ -12,12 +12,10 @@ const GameSolver: React.FC = () => {
     useEffect(() => {
         if (state.state.isPlaying || (state.state.isStepping && !state.state.isStepFinished)) {
             if(!state.state.isInitialized && !state.state.isBeingInitialized) {
-                console.log('dispatching initializeGameStateThunk');
                 dispatch(initializeGameStateThunk({ gameState: state.state, gameResources: state.resources }));
             }
             else if(state.state.isInitialized && !state.state.isRunning && !state.state.isLevelOver) {
-                console.log('dispatching runGameplayLoopThunk');
-                dispatch(runGameplayLoopThunk({ gameState: state.state, gameResources: state.resources }));
+                dispatch(runGameplayLoopThunk({ gameState: state.state, gameResources: state.resources, userInput: state.userInput }));
             }
             else if (state.state.isLevelOver && !state.state.isAdvancingLevel && !state.state.isAdvancingFinished) {
                 dispatch(advanceGameLevel({ gameState: state.state, gameResources: state.resources }))

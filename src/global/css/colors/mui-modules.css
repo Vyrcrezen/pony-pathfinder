@@ -41,3 +41,11 @@
 .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
     color: var(--vy-sys-color-on-surface);
 }
+
+.css-uc9pfh-MuiInputBase-root-MuiInput-root {
+    color: var(--vy-sys-color-on-surface) !important;
+}
+
+.css-1raals2-MuiInputBase-root-MuiInput-root {
+    color: var(--vy-sys-color-on-surface) !important;
+}

@@ -12,3 +12,5 @@
 /* @import url(./color/theme-dark.css) (prefers-color-scheme: dark); */
 
 @import url(./unsorted.css);
+
+@import url(./../../features/ponySolver/styles/mapArea.css);
