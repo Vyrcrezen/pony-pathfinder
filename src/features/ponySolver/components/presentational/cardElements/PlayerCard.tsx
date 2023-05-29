@@ -7,6 +7,8 @@ import getReadableHeroAction from "../../../util/getReadableHeroAction";
 
 export default function PlayerCard() {
 
+    const state = useAppSelector(state => state.ponySolver);
+
     const storeResources = useAppSelector(state => state.ponySolver.resources);
     const heroHealth = Math.round((storeResources.gameMap.heroes[0]?.health ?? 1) * 100);
     const heroAction = storeResources.gameMap.heroes[0]?.heroAction ?? "NOTHING";
@@ -15,7 +17,12 @@ export default function PlayerCard() {
     return (
         <div className="d-flex flex-wrap rounded vy-secondary p-2 flex-grow-1">
             <div className="image-container">
-                <img className="img-fluid rounded vy-img-fit vy-profile-img" src={playerPortraitImg} alt="Player character" />
+                <img
+                    className="img-fluid rounded vy-img-fit vy-profile-img"
+                    src={playerPortraitImg}
+                    alt="Player character"
+                    onClick={() => console.log(state)}
+                />
             </div>
             <div className="description-container ms-2 flex-grow-1">
                 <h5 className="m-0">Player</h5>

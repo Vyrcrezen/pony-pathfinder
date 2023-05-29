@@ -34,9 +34,6 @@ export default function GameMap() {
         let alignedHeatMap: number[][] | undefined = undefined;
         if (state.resources.heatMap) alignedHeatMap = rotate2DArray<number>(state.resources.heatMap);
 
-        console.log('Aligned heat map');
-        console.log(alignedHeatMap);
-
         if (canvasRef.current) {
             const canvas = canvasRef.current;
             const parentNode = canvas.parentElement;

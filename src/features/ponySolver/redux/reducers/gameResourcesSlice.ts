@@ -64,10 +64,12 @@ const gameResourcesSlice = createSlice({
             // Create an array of heatmaps for each enemy
             const enemyHeatMaps: number[][][] = state.mapState.map.enemies.reduce((acc, enemy) => {
 
-                const multiplicationFactor =  enemy.bulletDamage * (ghostHeatSettings?.bulletDamageWeight ?? 1)
-                                              + enemy.onTouchDamage * (ghostHeatSettings?.touchDamageWeight ?? 1)
-                                              + enemy.moveProbability * (ghostHeatSettings?.moveProbabilityWeight ?? 0)
-                                              + enemy.shootProbability * (ghostHeatSettings?.shootProbabilityWeight ?? 0)
+                const multiplicationFactor =  (
+                                                enemy.bulletDamage * (ghostHeatSettings?.bulletDamageWeight ?? 1)
+                                                + enemy.onTouchDamage * (ghostHeatSettings?.touchDamageWeight ?? 1)
+                                                + enemy.moveProbability * (ghostHeatSettings?.moveProbabilityWeight ?? 0)
+                                                + enemy.shootProbability * (ghostHeatSettings?.shootProbabilityWeight ?? 0)
+                                              ) * (ghostHeatSettings?.flatMultiplier ?? 1)
 
                 if ( enemy.health > 0 ) {
                     acc.push(vyFloodFill({
@@ -91,7 +93,7 @@ const gameResourcesSlice = createSlice({
             // Create an array of heat maps for each bullet
             const bulletHeatMaps = state.mapState.map.bullets.map(bullet => {
 
-                const multiplicationFactor = bullet.damage * (bulletHeatSettings?.bulletDamageWeight ?? 1);
+                const multiplicationFactor = (bullet.damage * (bulletHeatSettings?.bulletDamageWeight ?? 1)) * (bulletHeatSettings?.flatMultiplier ?? 1);
 
                 return vyFloodFill({
                     mapWidth: state.mapState!.map.width,

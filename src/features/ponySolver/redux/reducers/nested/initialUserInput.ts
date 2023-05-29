@@ -10,6 +10,7 @@ const initialUserInput: UserInput = {
         touchDamageWeight: 1,
         shootProbabilityWeight: 0,
         moveProbabilityWeight: 0,
+        flatMultiplier: 1,
     
         heatCutoffThreshold: 0.1,
         heatFormula: '-2log(x+0.55)-0.2',
@@ -18,6 +19,7 @@ const initialUserInput: UserInput = {
 
     bulletHeatSettings: {
         bulletDamageWeight: 1,
+        flatMultiplier: 1,
         formulaVerticalAdjustement: 0,
         
         heatCutoffThreshold: 0.1,

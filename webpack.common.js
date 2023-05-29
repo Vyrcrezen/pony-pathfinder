@@ -37,6 +37,7 @@ module.exports = {
       minify: true,
       filename: "ponySolver.html",
       chunks: ["ponySolver"],
+      publicPath: "/"
     }),
   ],
   resolve: {

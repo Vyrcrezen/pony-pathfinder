@@ -42,6 +42,10 @@ const gameUserInputSlice = createSlice({
             if (typeof action.payload === 'number' && !isNaN(action.payload) )
                 state.ghostHeatSettings.formulaVerticalAdjustement = action.payload;
         },
+        setGhostFlatMultiplier: (state, action: PayloadAction<number>) => {
+            if (typeof action.payload === 'number' && !isNaN(action.payload) )
+                state.ghostHeatSettings.flatMultiplier = action.payload;
+        },
         // Bullet heat settings
         setBulletBulletDamageWeight: (state, action: PayloadAction<number>) => {
             if (typeof action.payload === 'number' && !isNaN(action.payload) )
@@ -58,6 +62,10 @@ const gameUserInputSlice = createSlice({
             if (typeof action.payload === 'number' && !isNaN(action.payload) )
                 state.bulletHeatSettings.formulaVerticalAdjustement = action.payload;
         },
+        setBulletFlatMultiplier: (state, action: PayloadAction<number>) => {
+            if (typeof action.payload === 'number' && !isNaN(action.payload) )
+                state.bulletHeatSettings.flatMultiplier = action.payload;
+        },
     },
 });
 
@@ -70,10 +78,12 @@ export const {
     setGhostHeatFormula,
     setGhostHeatCutoffThreshold,
     setGhostFormulaVerticalAdjustement,
+    setGhostFlatMultiplier,
     setBulletBulletDamageWeight,
     setBulletHeatFormula,
     setBulletHeatCutoffThreshold,
     setBulletFormulaVerticalAdjustement,
+    setBulletFlatMultiplier,
 } = gameUserInputSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
