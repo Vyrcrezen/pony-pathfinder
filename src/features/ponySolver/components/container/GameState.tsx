@@ -1,6 +1,10 @@
 import React from "react";
 import { useAppSelector } from "../../../../global/redux/hooks";
 
+/**
+ * 
+ * @returns A simple game log widget. For every step the game takes, it also generates a new log entry. This widget displays the last 6 of these log entries.
+ */
 export default function GameState() {
 
     const state = useAppSelector(state => state.ponySolver);

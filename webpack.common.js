@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require("path");
 
 module.exports = {
@@ -31,8 +32,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyWebpackPlugin({
+        patterns: [
+            { from: 'server.js', to: './' }
+        ]
+    }),
+
     new HtmlWebpackPlugin({
-      title: "Melody Bits",
+      title: "Pony Game",
       injext: true,
       minify: true,
       filename: "ponySolver.html",

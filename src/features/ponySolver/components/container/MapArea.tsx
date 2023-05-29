@@ -1,10 +1,12 @@
 import React from 'react';
 import GameMap from '../presentational/GameMap';
-import DebugGameMap from '../presentational/DebugGameMap';
-import HeatMap from '../presentational/HeatMap';
 import MapControls from './MapControls';
 import MapSideElement from './MapSideElement';
 
+/**
+ * 
+ * @returns The map area, which includes the map, and the heat settings for the the Ghosts and Bullets/Fireballs
+ */
 export default function MapArea() {
 
     return (

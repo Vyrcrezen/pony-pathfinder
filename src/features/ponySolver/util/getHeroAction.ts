@@ -33,6 +33,16 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
         ) intendedAction = "USE_SHIELD";
     });
 
+    // Prevent running to a position, where the bullet is, if they are heading towards each other
+    gameResources.mapState?.map.bullets.forEach(bullet => {
+        if (
+            (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && intendedAction === "MOVE_RIGHT")
+            || (pathCoordinates[0].x - 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && intendedAction === "MOVE_LEFT")
+            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && intendedAction === "MOVE_DOWN")
+            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && intendedAction === "MOVE_UP")
+        ) intendedAction = "USE_SHIELD";
+    });
+
     // Prevent running to a position, where the bullet is going to be next turn, if they are heading towards each other
     gameResources.mapState?.map.bullets.forEach(bullet => {
         if (
@@ -63,6 +73,5 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
 
     intendedAction = intendedAction === 'NOTHING' ? "USE_SHIELD" : intendedAction;
 
-    console.log(`CHOSEN ACTION: ${intendedAction}`);
     return intendedAction;
 }

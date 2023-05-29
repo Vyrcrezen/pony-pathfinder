@@ -6,6 +6,5 @@ export default interface GhostHeatSettings {
     shootProbabilityWeight: number;
     formulaVerticalAdjustement: number;
     heatCutoffThreshold: number;
-    flatMultiplier: number;
     heatFormula: string;
 }

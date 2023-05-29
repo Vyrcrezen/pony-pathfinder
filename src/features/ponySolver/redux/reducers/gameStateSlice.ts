@@ -29,13 +29,22 @@ const gameStateSlice = createSlice({
             state.taskLog.unshift(action.payload);
             if (state.taskLog.length > 100) state.taskLog.length = 100;
         },
+        /**
+         * The game either be played or stepped. This reducer sets the playing state.
+         */
         toggleIsPlaying: (state) => {
             state.isPlaying = !state.isPlaying;
         },
+        /**
+         * The game either be played or stepped. This reducer triggers the next game step.
+         */
         setIsStepping: (state, action: PayloadAction<boolean>) => {
             state.isStepFinished = false;
             state.isStepping = action.payload;
         },
+        /**
+         * This reducer is called by the gameplay thunks to signal that the recently requested step is finished.
+         */
         setSteppingFinished: (state, action: PayloadAction<boolean>) => {
             state.isStepFinished = action.payload;
         },

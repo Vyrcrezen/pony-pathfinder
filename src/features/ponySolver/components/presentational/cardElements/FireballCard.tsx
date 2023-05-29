@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import fireballPortraitImg from './../../../media/images/fireball-portrait.png';
 import { TextField } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../../../global/redux/hooks";
-import { setBulletBulletDamageWeight, setBulletFlatMultiplier, setBulletFormulaVerticalAdjustement, setBulletHeatCutoffThreshold, setBulletHeatFormula, setGhostBulletDamageWeight, setGhostFormulaVerticalAdjustement, setGhostHeatCutoffThreshold, setGhostHeatFormula, setGhostMoveProbabilityWeight, setGhostTouchDamageWeight } from "../../../redux/reducers/gameUserInputSlice";
+import { setBulletBulletDamageWeight, setBulletFormulaVerticalAdjustement, setBulletHeatCutoffThreshold, setBulletHeatFormula, setGhostBulletDamageWeight, setGhostFormulaVerticalAdjustement, setGhostHeatCutoffThreshold, setGhostHeatFormula, setGhostMoveProbabilityWeight, setGhostTouchDamageWeight } from "../../../redux/reducers/gameUserInputSlice";
 import { evaluate } from "mathjs";
 
 export default function FireballCard() {
@@ -49,15 +49,6 @@ export default function FireballCard() {
                                     variant='standard'
                                     size="small"
                                     onBlur={(event) => dispatch(setBulletFormulaVerticalAdjustement(+event.target.value))}
-                                />
-                                <TextField
-                                    className="mb-2"
-                                    fullWidth
-                                    label='Flat multiplier:'
-                                    defaultValue={bulletHeatSettings.flatMultiplier}
-                                    variant='standard'
-                                    size="small"
-                                    onBlur={(event) => dispatch(setBulletFlatMultiplier(+event.target.value))}
                                 />
                             </div>
                         </div>

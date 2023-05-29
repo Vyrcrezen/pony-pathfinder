@@ -5,6 +5,8 @@ export default interface UserInput {
     heatMapOpacity: number;
     isHeatValueDisplayEnabled: boolean;
 
+    graphEdgeMultiplier: number;
+
     // Ghost heat settings
     ghostHeatSettings: GhostHeatSettings;
 

@@ -18,7 +18,6 @@ export default async function postApproveHeroTurn(token: string, action: HeroAct
         });
     
         const data = await result.json();
-        console.log(data);
 
         return data as ApproveHeroTurnResponse;
     }

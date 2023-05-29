@@ -3,11 +3,6 @@ import Path from "../types/Path";
 
 export default function getPathToClosestTarget( graphMap: {[prop: string]: { [prop: string]: number }}, graphStart: string, graphTargets: string[]) {
 
-    console.log('Inside getPathToClosestTarget');
-    console.log(JSON.parse(JSON.stringify(graphMap)));
-    console.log(graphStart);
-    console.log(graphTargets);
-
     const targetWithPath: Path[] = [];
     const graph = new Graph(JSON.parse(JSON.stringify(graphMap)));
 
@@ -19,9 +14,6 @@ export default function getPathToClosestTarget( graphMap: {[prop: string]: { [pr
 
     let pathToClosestTarget: Path = targetWithPath[0];
     for (const target of targetWithPath) {
-        // console.log('Path with cost:');
-        // console.log(target);
-        // if (!closestTarget) closestTarget = target;
         if (pathToClosestTarget.cost > target.cost) pathToClosestTarget = target;
     }
 

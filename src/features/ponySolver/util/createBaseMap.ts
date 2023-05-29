@@ -4,8 +4,6 @@ export default function createBaseMap({width, height, obstacles}: { width: numbe
 
     try {
         const obstacleMap = Array.from({ length: height }, () => new Array(width).fill(0));
-
-        console.log(obstacleMap);
     
         Object.keys(obstacles).forEach(x => {
 

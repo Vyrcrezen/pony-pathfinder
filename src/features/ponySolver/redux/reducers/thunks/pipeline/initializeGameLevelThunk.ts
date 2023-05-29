@@ -1,17 +1,22 @@
 import updateMapStateThunk from "../apiThunk/updateMapStateThunk";
 import { AppDispatch } from "../../../../../../global/redux/store";
-import {setHasHeroActed, setIsBaseMapGenerated, setIsBeingInitialized, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsHeatMapUpdated, setIsInitMapStateFetched, setIsInitialized, setIsLevelOver, setIsMapResourcesFetched, setIsMapStateFetched, setIsMapStatusUpdated, setIsPathCalculated, setSteppingFinished} from "../../gameStateSlice";
+import {setIsBaseMapGenerated, setIsBeingInitialized, setIsInitMapStateFetched, setIsInitialized, setIsMapResourcesFetched, setSteppingFinished} from "../../gameStateSlice";
 import GameState from "../../../../types/GameState";
 import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import { generateBaseMap } from "../../gameResourcesSlice";
 import updateMapResourceThunk from "../apiThunk/updateMapResourceThunk";
 import GameResources from "../../../../types/GameResources";
 
+/**
+ * Performs game setup tasks like: fetching the `mapResources` and `mapState`, as well as generating the obstacle map, which won't change throughout the level
+ * @param param0 an object like: `{ gameState: GameState, gameResources: GameResources }`, where `GameState` and `GameResources` are from the Redux store
+ */
 const initializeGameStateThunk =
     ({ gameState, gameResources }: { gameState: GameState, gameResources: GameResources }) => async (dispatch: AppDispatch) => {
 
         const { token } = gameResources;
 
+        // Make sure that multiple initialization thunk instances can't be run simultaneously
         dispatch(setIsBeingInitialized(true));
 
         if (!gameState.initTasks.isMapResourcesFetched) {
@@ -31,16 +36,6 @@ const initializeGameStateThunk =
             dispatch(setIsBaseMapGenerated(true));
 
             dispatch(setIsInitialized(true));
-
-            // Reset the next game logic states to default, to be sure
-            // dispatch(setIsLevelOver(false));
-            // dispatch(setIsMapStateFetched(false));
-            // dispatch(setIsMapStatusUpdated(false));
-            // dispatch(setIsGameMapUpdated(false));
-            // dispatch(setIsHeatMapUpdated(false));
-            // dispatch(setIsGameMapGraphCreated(false));
-            // dispatch(setIsPathCalculated(false));
-            // dispatch(setHasHeroActed(false));
         }
 
         dispatch(setIsBeingInitialized(false));

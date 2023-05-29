@@ -5,6 +5,10 @@ function getSrcToImage(src: string) {
     return image;
 }
 
+/**
+ * 
+ * @returns An array of all the images which are used inside the game map. Each image is dynamically imported, and then converted to an `img` element for the game map canvas.
+ */
 export default async function importMapAssets() {
 
     type assetPropNames = 'ponyChar' | 'hoofPrints' | 'shield' | 'sword' | 'ghost' | 'ghostLamp' | 'fruit' | 'fruitCore' | 'fireball' | 'arrowSlim' | 'carOne' | 'carTwo' | 'carThree' | 'carFour' | 'blankMap';

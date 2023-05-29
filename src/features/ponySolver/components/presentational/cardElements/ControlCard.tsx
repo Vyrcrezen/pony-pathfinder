@@ -4,6 +4,10 @@ import { useAppDispatch, useAppSelector } from "../../../../../global/redux/hook
 import { addGameToken, resetLevelResources } from "../../../redux/reducers/gameResourcesSlice";
 import { resetLevelState, setIsStepping, toggleIsPlaying } from "../../../redux/reducers/gameStateSlice";
 
+/**
+ * 
+ * @returns The token widget, where the player can input their game token, and control the flow of the game: playing, stopping, stepping and resetting.
+ */
 export default function ControlCard() {
 
     const dispatch = useAppDispatch();
@@ -17,7 +21,7 @@ export default function ControlCard() {
                 variant='outlined'
                 multiline
                 minRows={2}
-                onBlur={(event) => dispatch(addGameToken(event.target.value))}
+                onChange={(event) => dispatch(addGameToken(event.target.value))}
             />
             <div className='d-flex flex-row justify-content-evenly mt-3'>
                 <Button
@@ -35,7 +39,7 @@ export default function ControlCard() {
                     color='primary'
                     disabled={state.state.isPlaying || !state.resources.token ? true : false}
                 >
-                    {'Step'}
+                    Step
                 </Button>
                 <Button
                     variant='contained'

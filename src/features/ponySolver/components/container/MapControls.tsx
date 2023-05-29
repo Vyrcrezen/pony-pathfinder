@@ -29,7 +29,7 @@ export default function MapControls() {
                     checked={userInput.isHeatValueDisplayEnabled}
                     onChange={() => dispatch(setIsHeatValueDisplayEnabled(!userInput.isHeatValueDisplayEnabled))}
                 />
-            }  className="flex-fill" labelPlacement="start" label="Heat Value:" />
+            }  className="flex-fill" labelPlacement="start" label="Pathing Value:" />
         </div>
     );
 }

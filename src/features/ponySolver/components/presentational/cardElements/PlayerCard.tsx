@@ -5,10 +5,15 @@ import { LinearProgress } from "@mui/material";
 import { useAppSelector } from "../../../../../global/redux/hooks";
 import getReadableHeroAction from "../../../util/getReadableHeroAction";
 
+/**
+ * 
+ * @returns The player card, which includes the player image, the current level, player health and the next player ection. Clicking on the player image will log the `Redux store` to the console.
+ */
 export default function PlayerCard() {
 
     const state = useAppSelector(state => state.ponySolver);
 
+    // Retrieve the values which are to be displayed
     const storeResources = useAppSelector(state => state.ponySolver.resources);
     const heroHealth = Math.round((storeResources.gameMap.heroes[0]?.health ?? 1) * 100);
     const heroAction = storeResources.gameMap.heroes[0]?.heroAction ?? "NOTHING";

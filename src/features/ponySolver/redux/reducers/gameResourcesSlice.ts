@@ -19,6 +19,7 @@ import getDefaultGameResources from "../../initializers/getDefaultGameResources"
 import getHeroAction from "../../util/getHeroAction";
 import GhostHeatSettings from "../../types/GhostHeatSettings";
 import BulletHeatSettings from "../../types/BulletHeatSettings";
+import UserInput from "../../types/UserInput";
 
 const gameResourcesSlice = createSlice({
     name: "ponySolver/resources",
@@ -64,12 +65,11 @@ const gameResourcesSlice = createSlice({
             // Create an array of heatmaps for each enemy
             const enemyHeatMaps: number[][][] = state.mapState.map.enemies.reduce((acc, enemy) => {
 
-                const multiplicationFactor =  (
-                                                enemy.bulletDamage * (ghostHeatSettings?.bulletDamageWeight ?? 1)
+                const multiplicationFactor =    enemy.bulletDamage * (ghostHeatSettings?.bulletDamageWeight ?? 1)
                                                 + enemy.onTouchDamage * (ghostHeatSettings?.touchDamageWeight ?? 1)
                                                 + enemy.moveProbability * (ghostHeatSettings?.moveProbabilityWeight ?? 0)
-                                                + enemy.shootProbability * (ghostHeatSettings?.shootProbabilityWeight ?? 0)
-                                              ) * (ghostHeatSettings?.flatMultiplier ?? 1)
+                                                + enemy.shootProbability * (ghostHeatSettings?.shootProbabilityWeight ?? 0);
+                                              
 
                 if ( enemy.health > 0 ) {
                     acc.push(vyFloodFill({
@@ -93,7 +93,7 @@ const gameResourcesSlice = createSlice({
             // Create an array of heat maps for each bullet
             const bulletHeatMaps = state.mapState.map.bullets.map(bullet => {
 
-                const multiplicationFactor = (bullet.damage * (bulletHeatSettings?.bulletDamageWeight ?? 1)) * (bulletHeatSettings?.flatMultiplier ?? 1);
+                const multiplicationFactor = bullet.damage * (bulletHeatSettings?.bulletDamageWeight ?? 1);
 
                 return vyFloodFill({
                     mapWidth: state.mapState!.map.width,
@@ -119,9 +119,11 @@ const gameResourcesSlice = createSlice({
 
             
         },
-        generateGameMapGraph: (state) => {
+        generateGameMapGraph: (state, action: PayloadAction<{ userInput: UserInput }>) => {
             if (!state.baseMap || !state.heatMap) return;
-            state.gameMapGraph = createGraphFrom2dArray(state.baseMap, state.heatMap);
+            const userInput = action.payload.userInput;
+            
+            state.gameMapGraph = createGraphFrom2dArray(state.baseMap, state.heatMap, userInput.graphEdgeMultiplier);
         },
         generateHeroPath: (state) => {
             if (!state.mapState || !state.gameMapGraph || !state.gameMap) return;

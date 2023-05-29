@@ -3,10 +3,11 @@ import GameControl from '../container/GameControl';
 import MapArea from '../container/MapArea';
 import { ThemeProvider } from '@mui/material';
 import defaultTheme from '../../../../global/mui/defaultTheme';
-import DebugReduxStore from '../container/DebugReduxStore';
-import GameState from '../container/GameState';
-import MapSideElement from '../container/MapSideElement';
 
+/**
+ * 
+ * @returns The pony game solver UI, including the token widget, game log, player data, ghost and bullet setting qidget and the game map.
+ */
 export default function GameSolverUi() {
 
     return (

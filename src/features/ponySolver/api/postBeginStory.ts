@@ -8,6 +8,4 @@ export default async function postBeginStory(token: string) {
         },
         mode: 'cors'
     });
-
-    console.log(result);
 }

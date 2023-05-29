@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ghostPortraitImg from './../../../media/images/ghost-portrait.png';
 import { TextField } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../../../global/redux/hooks";
-import { setGhostBulletDamageWeight, setGhostFlatMultiplier, setGhostFormulaVerticalAdjustement, setGhostHeatCutoffThreshold, setGhostHeatFormula, setGhostMoveProbabilityWeight, setGhostTouchDamageWeight } from "../../../redux/reducers/gameUserInputSlice";
+import { setGhostBulletDamageWeight, setGhostFormulaVerticalAdjustement, setGhostHeatCutoffThreshold, setGhostHeatFormula, setGhostMoveProbabilityWeight, setGhostTouchDamageWeight } from "../../../redux/reducers/gameUserInputSlice";
 import { evaluate } from "mathjs";
 
 export default function GhostCard() {
@@ -76,15 +76,6 @@ export default function GhostCard() {
                                     variant='standard'
                                     size="small"
                                     onBlur={(event) => dispatch(setGhostFormulaVerticalAdjustement(+event.target.value))}
-                                />
-                                <TextField
-                                    className="mb-2"
-                                    fullWidth
-                                    label='Flat multiplier:'
-                                    defaultValue={ghostHeatSettings.flatMultiplier}
-                                    variant='standard'
-                                    size="small"
-                                    onBlur={(event) => dispatch(setGhostFlatMultiplier(+event.target.value))}
                                 />
                             </div>
                         </div>
