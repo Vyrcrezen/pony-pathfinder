@@ -1,8 +1,8 @@
 {
-  "name": "vyr_pony-game-solver",
+  "name": "vyr_pony-pathfinder",
   "version": "1.0.0",
   "description": "This application is written for the Pony Panic challenge organized by ICF Technology.",
-  "main": "src/index.tsx",
+  "main": "src/pages/PonySolver.tsx",
   "scripts": {
     "run": "node out/server.js",
     "build": "webpack --config webpack.prod.js",

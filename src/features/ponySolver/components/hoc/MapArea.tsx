@@ -1,6 +1,6 @@
 import React from 'react';
-import GameMap from '../presentational/GameMap';
-import MapControls from './MapControls';
+import GameMap from '../container/GameMap';
+import MapControls from '../presentational/MapControls';
 import MapSideElement from './MapSideElement';
 
 /**
@@ -12,7 +12,7 @@ export default function MapArea() {
     return (
         <div className="container mt-3">
             <div className="row">
-                <div className="col-lg-8 flex-grow-1 map-element">
+                <div className="col-lg-8 flex-grow-1 map-element mb-2">
                     <div className='d-flex flex-column align-items-center h-100 rounded vy-secondary'>
                         <GameMap />
                         <MapControls />

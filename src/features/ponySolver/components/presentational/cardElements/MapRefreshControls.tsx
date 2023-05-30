@@ -10,7 +10,7 @@ export default function MapRefreshControls() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="d-flex flex-column align-items-center rounded vy-secondary p-3 my-2">
+        <div className="d-flex flex-column align-items-center rounded vy-secondary p-3 mb-2">
             <div className="p-0 w-100 d-flex flex-row justify-content-evenly">
                 <Button
                     onClick={() => dispatch(generateHeatMap({ bulletHeatSettings: state.userInput.bulletHeatSettings, ghostHeatSettings: state.userInput.ghostHeatSettings }))}

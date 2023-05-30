@@ -2,7 +2,7 @@ import React from 'react';
 import GameSolver from '../../logic/GameSolver';
 import PlayerCard from '../presentational/cardElements/PlayerCard';
 import ControlCard from '../presentational/cardElements/ControlCard';
-import GameState from './GameState';
+import GameState from '../presentational/GameState';
 
 /**
  * 

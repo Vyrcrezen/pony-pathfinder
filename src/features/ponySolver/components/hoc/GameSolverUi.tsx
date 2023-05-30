@@ -1,6 +1,6 @@
 import React from 'react';
-import GameControl from '../container/GameControl';
-import MapArea from '../container/MapArea';
+import GameControl from './GameControl';
+import MapArea from './MapArea';
 import { ThemeProvider } from '@mui/material';
 import defaultTheme from '../../../../global/mui/defaultTheme';
 
