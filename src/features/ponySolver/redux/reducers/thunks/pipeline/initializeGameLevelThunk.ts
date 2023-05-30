@@ -24,13 +24,13 @@ const initializeGameStateThunk =
             dispatch(setSteppingFinished(true));
             dispatch(setIsMapResourcesFetched(true));
         }
-        if (gameState.initTasks.isMapResourcesFetched && !gameState.initTasks.isInitMapStateFetched) {
+        else if (gameState.initTasks.isMapResourcesFetched && !gameState.initTasks.isInitMapStateFetched) {
             await gameStepActionWrapper(dispatch, gameState, 'Fetching initial mapState', updateMapStateThunk, {token});
             dispatch(setSteppingFinished(true));
             dispatch(setIsInitMapStateFetched(true));
         }
         
-        if (gameState.initTasks.isInitMapStateFetched && !gameState.initTasks.isBaseMapGenerated) {
+        else if (gameState.initTasks.isInitMapStateFetched && !gameState.initTasks.isBaseMapGenerated) {
             gameStepActionWrapper(dispatch, gameState, 'Generating baseMap', generateBaseMap);
             dispatch(setSteppingFinished(true));
             dispatch(setIsBaseMapGenerated(true));
