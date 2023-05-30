@@ -22,7 +22,12 @@ This is a React application, which interfaces with the [Pony Panic API](https://
 ---
 
 ## Installation
-To build the project, run:
+To install the project, run this command first:
+```
+$ npm install
+```
+
+Then, to build the project, run:
 ```
 $ npm run build
 ```
