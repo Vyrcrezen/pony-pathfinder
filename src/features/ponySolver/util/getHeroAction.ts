@@ -12,7 +12,14 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
     // Determine the intended movement
     let intendedAction: HeroAction = getMovementDirection(pathCoordinates[0], pathCoordinates[1]);
 
-    let targetEnemy: Enemy;
+    
+    // +x: ->
+    // -x: <-
+    // +y: ^
+    // -y: ^
+
+    // HeroAction
+
     // Find enemies to hit
     gameResources.mapState?.map.enemies.forEach(enemy => {
         if (enemy.health > 0) {
@@ -28,8 +35,8 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
         if (
             (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "LEFT" && (intendedAction === "MOVE_RIGHT" || intendedAction.includes('KICK')))
             || (pathCoordinates[0].x - 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "RIGHT" && (intendedAction === "MOVE_LEFT" || intendedAction.includes('KICK')))
-            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "UP" && (intendedAction === "MOVE_DOWN" || intendedAction.includes('KICK')))
-            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "DOWN" && (intendedAction === "MOVE_UP" || intendedAction.includes('KICK')))
+            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "DOWN" && (intendedAction === "MOVE_UP" || intendedAction.includes('KICK')))
+            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "UP" && (intendedAction === "MOVE_DOWN" || intendedAction.includes('KICK')))
         ) intendedAction = "USE_SHIELD";
     });
 
@@ -38,8 +45,8 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
         if (
             (pathCoordinates[0].x + 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && intendedAction === "MOVE_RIGHT")
             || (pathCoordinates[0].x - 1 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && intendedAction === "MOVE_LEFT")
-            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && intendedAction === "MOVE_DOWN")
-            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && intendedAction === "MOVE_UP")
+            || (pathCoordinates[0].y + 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && intendedAction === "MOVE_UP")
+            || (pathCoordinates[0].y - 1 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && intendedAction === "MOVE_DOWN")
         ) intendedAction = "USE_SHIELD";
     });
 
@@ -48,8 +55,8 @@ export default function getHeroAction({ heroPath, gameResources }: { heroPath: P
         if (
             (pathCoordinates[0].x + 2 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "LEFT" && intendedAction === "MOVE_RIGHT")
             || (pathCoordinates[0].x - 2 === bullet.position.x && pathCoordinates[0].y === bullet.position.y && bullet.direction === "RIGHT" && intendedAction === "MOVE_LEFT")
-            || (pathCoordinates[0].y + 2 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "UP" && intendedAction === "MOVE_DOWN")
-            || (pathCoordinates[0].y - 2 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "DOWN" && intendedAction === "MOVE_UP")
+            || (pathCoordinates[0].y + 2 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "DOWN" && intendedAction === "MOVE_UP")
+            || (pathCoordinates[0].y - 2 === bullet.position.y && pathCoordinates[0].x === bullet.position.x && bullet.direction === "UP" && intendedAction === "MOVE_DOWN")
         ) intendedAction = "USE_SHIELD";
     });
 

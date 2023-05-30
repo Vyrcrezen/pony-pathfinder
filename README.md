@@ -112,6 +112,12 @@ This is the effect of setting the **Heat cutoff threshold** to 0.6:
 
 <img src="./readme_img/ui-heat-cutoff-threshold.jpg" height="640">
 
+Another **Heat formula** worth trying out is the **Gaussian distribution** formula: `(1/σ*sqrt(2*PI))*e^(-(x+μ)^2/(2*σ)^2)`. Make sure to substitute values for **σ** and **μ**.
+
+This Gaussian distribution formula worked well for me: `(1/0.05*sqrt(2*PI))*e^(-(x+0)^2/(2*0.05)^2)`.
+
+However, it takes longer to compute the heat values with this formula. After substituting some values, we can arrive at a computationally cheaper approximation: `50*2.7^(-x^2/0.01)`
+
 ---
 
 ### Automatic actions
