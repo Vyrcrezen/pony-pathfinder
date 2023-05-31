@@ -8,6 +8,7 @@ export default function createBaseMap({width, height, obstacles}: { width: numbe
         Object.keys(obstacles).forEach(x => {
 
             obstacles[x].forEach(y => {
+
                 obstacleMap[+x][y] = MapEntities.OBSTACLE;
             })
         });

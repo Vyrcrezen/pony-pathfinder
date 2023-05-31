@@ -32,7 +32,7 @@ const gameResourcesSlice = createSlice({
             state.mapResources = action.payload;
         },
         updateMapState: (state, action: PayloadAction<MapState>) => {
-            state.mapState = action.payload;
+            state.mapState = {...action.payload, map: { ...action.payload.map, height: action.payload.map.width, width: action.payload.map.height}};
         },
         updatePlaythroughState: (state, action: PayloadAction<PlaythroughState>) => {
             state.playthroughState = action.payload;
