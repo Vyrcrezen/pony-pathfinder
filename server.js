@@ -3,8 +3,12 @@ const path = require('path');
 
 const app = express();
 
-app.use("/", express.static(path.join(__dirname, "dist"), { extensions: ["html"] }));
+app.use("/", express.static(path.join(__dirname), { extensions: ["html"] }));
 
-app.get("/", (_req, res) => res.sendFile(path.join(__dirname, 'dist/ponySolver.html')));
+app.get("/", (_req, res) => res.sendFile(path.join(__dirname, 'ponySolver.html')));
 
-app.listen(8081);
+const port = 8081;
+
+app.listen(port, () => {
+    console.log(`Server is now running on port ${port}`);
+});

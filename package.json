@@ -4,7 +4,7 @@
   "description": "This application is written for the Pony Panic challenge organized by ICF Technology.",
   "main": "src/pages/PonySolver.tsx",
   "scripts": {
-    "run": "node out/server.js",
+    "start": "node dist/server.js",
     "build": "webpack --config webpack.prod.js",
     "build:dev": "webpack -w --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"

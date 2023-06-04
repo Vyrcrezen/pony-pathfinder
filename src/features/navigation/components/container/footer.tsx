@@ -6,11 +6,6 @@ export function Footer() {
         <footer className="pt-2 mt-5 vy-on-secondary-text" >
             <div className="container d-flex flex-md-row flex-column justify-content-between" >
                 <div className="d-flex flex-column order-md-1 mb-2">
-                    <div className="fs-6">
-                        Copyright © 2023
-                        <br />
-                        All Rights Reserved.
-                    </div>
                     <div className="fs-7 mt-2 fs-small">
                         Designed and developed by:
                         <br />
