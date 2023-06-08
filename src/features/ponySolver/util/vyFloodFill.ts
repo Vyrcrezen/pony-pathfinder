@@ -1,16 +1,6 @@
 import { distance, divide, format, evaluate } from "mathjs";
 import Coordinate from "../types/Coordinate";
-
-interface FloodFillArguments {
-    mapWidth: number;
-    mapHeight: number;
-    startingCell: Coordinate;
-    heatSourceCell: Coordinate;
-    cutoffThreshold: number;
-    heatCalcFormula?: string;
-    heatCalcVerticalAdjustment?: number;
-    valueMultiplicationFactor?: number;
-}
+import FloodFillArguments from "../types/FloodFillArguments";
 
 const formulaList = ['3^(-5*x)-0.6', '-2log(x+0.55)-0.2'];
 

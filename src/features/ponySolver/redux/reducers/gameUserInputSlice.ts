@@ -16,6 +16,13 @@ const gameUserInputSlice = createSlice({
         setGraphEdgeMultiplier: (state, action: PayloadAction<number>) => {
             state.graphEdgeMultiplier = action.payload;
         },
+        setWebWorkerCount: (state, action: PayloadAction<number>) => {
+            if (typeof action.payload !== 'number') return;
+            if (action.payload <= 0) return;
+            if (action.payload >= 32) return;
+
+            state.webWorkerCount = action.payload;
+        },
         // Ghost heat settings
         setGhostBulletDamageWeight: (state, action: PayloadAction<number>) => {
             if (typeof action.payload === 'number' && !isNaN(action.payload) )
@@ -68,6 +75,7 @@ export const {
     setHeatMapOpacity,
     setIsHeatValueDisplayEnabled,
     setGraphEdgeMultiplier,
+    setWebWorkerCount,
     setGhostBulletDamageWeight,
     setGhostTouchDamageWeight,
     setGhostMoveProbabilityWeight,

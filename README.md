@@ -11,6 +11,7 @@ This is a React application, which interfaces with the [Pony Panic API](https://
     - [Heat Map](#heat-map)
     - [Automatic actions](#automatic-actions)
     - [Weight values](#weight-values)
+    - [Web workers and Multi-Threading](#web-workers-and-multi-threading)
     - [Conclusion](#conclusion)
   - [Project Structure](#project-structure)
     - [Root](#root)
@@ -166,9 +167,21 @@ For the sake of testing, let's say that we are only interested in how much touch
 
 This is the resulting heat map, after giving a weight value of 1 to the **Touch damage**:
 
-<img src="./readme_img/ui-touch-damage-weight.jpg" height="640">
+<img src="./readme_img/ui-touch-damage-weight.jpg">
 
 With these settings, we can see how these settings influenced the heat map and the pathing value generation. The ghost with the higher touch damage has a larger base heat value, which also radiates out further.
+
+---
+
+### Web workers and Multi-Threading
+
+The application now supports multi-threading through the use of web workers.
+
+The calculation of the heat maps for each different heat source is computationally expensive, especially with more complex formulas. These calculations for each different heat source are now evenly distributed amongst the available web workers. Once all the heat maps are calculated, they are combined into a single heat map on the main thread.
+
+The number of web workers in use can be adjusted on the `Update Area` panel:
+
+<img src="./readme_img//ui-web-workers.jpg">
 
 ---
 
@@ -178,7 +191,7 @@ Thank you for following along this introduction. I hope that you will have a goo
 
 If you are interested more in the internal states and variables of the application, you can log the current `Redux store` to the console, by clicking on the Player's protrait.
 
-<img src="./readme_img/ui-Redux-store.jpg" height="400">
+<img src="./readme_img/ui-Redux-store.jpg">
 
 Also, a shout-out to [craiyon](https://www.craiyon.com/) for the AI generated images.
 
@@ -235,7 +248,7 @@ Starting with the **components** folder, we can see that it includes 3 additiona
 
 On this image, we can see how the UI is built using these components:
 
-<img src="./readme_img/structure-ui.jpg" height="640">
+<img src="./readme_img/structure-ui.jpg">
 
 ---
 

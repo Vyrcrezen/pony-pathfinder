@@ -1,4 +1,4 @@
-import { generateGameMap, generateGameMapGraph, generateHeatMap, generateHeroPath, selectHeroAction } from "../../gameResourcesSlice";
+import { generateGameMap, generateGameMapGraph, generateHeroPath, selectHeroAction } from "../../gameResourcesSlice";
 import updateMapStateThunk from "../apiThunk/updateMapStateThunk";
 import { AppDispatch } from "../../../../../../global/redux/store";
 import {setHasHeroActed, setIsGameMapGraphCreated, setIsGameMapUpdated, setIsLevelOver, setIsMapStateFetched, setIsPathCalculated, setIsRunning, setSteppingFinished, pushTaskDescription, setIsMapStatusUpdated, setIsHeatMapUpdated, setIsHeroActionSelected} from "../../gameStateSlice";
@@ -7,6 +7,7 @@ import gameStepActionWrapper from "../wrapperThunk/gameStepWrapperThunk";
 import performHeroActionThunk from "../apiThunk/performHeroActionThunk";
 import GameResources from "../../../../types/GameResources";
 import UserInput from "../../../../types/UserInput";
+import generateHeatMapThunk from "../taskThunk/generateHeatMapThunk";
 
 /**
  * 
@@ -46,7 +47,7 @@ const runGameplayLoopThunk =
         // The HeatMap is calculated for each cell based on a user input formula as well as some weight settings. Uses a custom Flood Fill algorithm
         else if (gameState.runtimeTasks.isGameMapUpdated && !gameState.runtimeTasks.isHeatMapUpdated) {
             dispatch(pushTaskDescription('Generating HeatMap'));
-            dispatch(generateHeatMap({ bulletHeatSettings: userInput.bulletHeatSettings, ghostHeatSettings: userInput.ghostHeatSettings }));
+            await dispatch(generateHeatMapThunk({ gameResources: gameResources, userInput, bulletHeatSettings: userInput.bulletHeatSettings, ghostHeatSettings: userInput.ghostHeatSettings }));
             dispatch(setSteppingFinished(true));
             dispatch(setIsHeatMapUpdated(true));
         }

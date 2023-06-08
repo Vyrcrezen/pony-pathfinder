@@ -4,6 +4,7 @@ const initialUserInput: UserInput = {
     heatMapOpacity: 20,
     isHeatValueDisplayEnabled: false,
     graphEdgeMultiplier: 10,
+    webWorkerCount: 1,
 
     // Ghost heat settings
     ghostHeatSettings: {

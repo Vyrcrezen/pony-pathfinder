@@ -20,6 +20,7 @@ import getHeroAction from "../../util/getHeroAction";
 import GhostHeatSettings from "../../types/GhostHeatSettings";
 import BulletHeatSettings from "../../types/BulletHeatSettings";
 import UserInput from "../../types/UserInput";
+import VyFloodFillManager from "../../workers/floodFill/VyFloodFillManager";
 
 const gameResourcesSlice = createSlice({
     name: "ponySolver/resources",
@@ -53,71 +54,8 @@ const gameResourcesSlice = createSlice({
             if (!state.mapState || !state.baseMap) return;
             state.gameMap = addDynamicAgentsToMap(_.cloneDeep(state.mapState));
         },
-        generateHeatMap: (state, action: PayloadAction<{ ghostHeatSettings?: GhostHeatSettings, bulletHeatSettings?: BulletHeatSettings }>) => {
-            if (!state.mapState ) return;
-
-            // Generate a 2d number array with 0 everywhere
-            const blankHeatMap: number[][] = Array.from({length: state.mapState!.map.height}, () => new Array(state.mapState!.map.width).fill(0));
-
-            // Resolve ghost heat settings
-            const ghostHeatSettings = action?.payload?.ghostHeatSettings;
-
-            // Create an array of heatmaps for each enemy
-            const enemyHeatMaps: number[][][] = state.mapState.map.enemies.reduce((acc, enemy) => {
-
-                const multiplicationFactor =    enemy.bulletDamage * (ghostHeatSettings?.bulletDamageWeight ?? 1)
-                                                + enemy.onTouchDamage * (ghostHeatSettings?.touchDamageWeight ?? 1)
-                                                + enemy.moveProbability * (ghostHeatSettings?.moveProbabilityWeight ?? 0)
-                                                + enemy.shootProbability * (ghostHeatSettings?.shootProbabilityWeight ?? 0);
-                                              
-
-                if ( enemy.health > 0 ) {
-                    acc.push(vyFloodFill({
-                        mapWidth: state.mapState!.map.width,
-                        mapHeight: state.mapState!.map.height,
-                        startingCell: { x: enemy.position.x, y: enemy.position.y },
-                        heatSourceCell: { x: enemy.position.x, y: enemy.position.y },
-                        heatCalcFormula: ghostHeatSettings?.heatFormula,
-                        heatCalcVerticalAdjustment: ghostHeatSettings?.formulaVerticalAdjustement,
-                        cutoffThreshold: ghostHeatSettings?.heatCutoffThreshold ?? 0.1,
-                        valueMultiplicationFactor: multiplicationFactor
-                    }));
-                }
-
-                return acc;
-            }, [] as number[][][]);
-
-            // Resolve ghost heat settings
-            const bulletHeatSettings = action?.payload?.bulletHeatSettings;
-
-            // Create an array of heat maps for each bullet
-            const bulletHeatMaps = state.mapState.map.bullets.map(bullet => {
-
-                const multiplicationFactor = bullet.damage * (bulletHeatSettings?.bulletDamageWeight ?? 1);
-
-                return vyFloodFill({
-                    mapWidth: state.mapState!.map.width,
-                    mapHeight: state.mapState!.map.height,
-                    startingCell: { x: bullet.position.x, y: bullet.position.y },
-                    heatSourceCell: { x: bullet.position.x, y: bullet.position.y },
-                    heatCalcFormula: bulletHeatSettings?.heatFormula,
-                    heatCalcVerticalAdjustment: bulletHeatSettings?.heatCutoffThreshold,
-                    cutoffThreshold: bulletHeatSettings?.heatCutoffThreshold ?? 0.1,
-                    valueMultiplicationFactor: multiplicationFactor
-            });
-        });
-
-            // Combine all heat map arrays into a single array of heat maps
-            const combinedHeatMap = [blankHeatMap, ...enemyHeatMaps, ...bulletHeatMaps];
-
-            // If we only have the blank heat map, return that (if there are neither enemies nor bullets)
-            if (combinedHeatMap.length === 1) state.heatMap = combinedHeatMap[0];
-            else {
-                const summedHeatMap = vyCombineHeatMaps(...combinedHeatMap);
-                state.heatMap = summedHeatMap;
-            }
-
-            
+        setHeatMap: (state, action: PayloadAction<number[][]>) => {
+            state.heatMap = action.payload;
         },
         generateGameMapGraph: (state, action: PayloadAction<{ userInput: UserInput }>) => {
             if (!state.baseMap || !state.heatMap) return;
@@ -161,7 +99,6 @@ export const {
     updatePlaythroughState,
     updateApproveHeroTurnResponse,
     generateBaseMap,
-    generateHeatMap,
     generateGameMap,
     generateGameMapGraph,
     generateHeroPath,

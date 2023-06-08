@@ -37,6 +37,11 @@ module.exports = {
             { from: 'server.js', to: './' }
         ]
     }),
+    new CopyWebpackPlugin({
+        patterns: [
+            { from: './src/global/media/images/favicon.ico', to: './' }
+        ]
+    }),
 
     new HtmlWebpackPlugin({
       title: "Pony Game",

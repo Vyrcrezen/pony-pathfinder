@@ -6,6 +6,7 @@ export default interface UserInput {
     isHeatValueDisplayEnabled: boolean;
 
     graphEdgeMultiplier: number;
+    webWorkerCount: number;
 
     // Ghost heat settings
     ghostHeatSettings: GhostHeatSettings;
