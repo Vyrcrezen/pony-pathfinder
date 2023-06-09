@@ -1,8 +1,10 @@
 
 export default class VyFloodFillManager {
-    private static workers: Worker[];
+    private static workers: Worker[] = [];
 
     private static initializeWorkers(count: number) {
+        VyFloodFillManager.workers.forEach(worker => worker.terminate());
+
         VyFloodFillManager.workers = [];
 
         for (let i = 0; i < count; i++) {

@@ -28,10 +28,14 @@ const generateHeatMapThunk = ({ gameResources, userInput, ghostHeatSettings, bul
     const mergedEntities: MergedEntities[] = [];
 
     // Merging ghosts and bullets for easier handling
-    mergedEntities.push(...gameResources.mapState.map.enemies.map<MergedEntities>(enemy => ({
-        type: 'ghost',
-        data: enemy
-    })));
+    mergedEntities.push(...gameResources.mapState.map.enemies.reduce((acc, enemy) => {
+
+        if (enemy.health > 0) {
+            acc.push({ type: 'ghost', data: enemy });
+        }
+
+        return acc;
+    }, [] as MergedEntities[]));
 
     mergedEntities.push(...gameResources.mapState.map.bullets.map<MergedEntities>(bullet => ({
         type: 'bullet',
